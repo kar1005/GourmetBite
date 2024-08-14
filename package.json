@@ -1,0 +1,24 @@
+{
+  "name": "gourmetbite",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krushang18/GourmetBite.git"
+  },
+  "author": "Khushi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/krushang18/GourmetBite/issues"
+  },
+  "homepage": "https://github.com/krushang18/GourmetBite#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongoose": "^8.5.3",
+    "nodemon": "^3.1.4"
+  }
+}
