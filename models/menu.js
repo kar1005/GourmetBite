@@ -1,5 +1,5 @@
 const mongoose  = require("mongoose");
-const schema  = mongoose.Schema;
+const Schema  = mongoose.Schema;
 
 const menuSchema = new Schema({
     category : {type:String, required:true},
@@ -9,7 +9,7 @@ const menuSchema = new Schema({
     description: {type:String, required:true},
     rating : {type:Number, required:false},
     allergyIngredients :{type:String, required:false},
-    availability : {type:Boolean, required:true},
+    availability : {type:Boolean, required:true,default:true},
 });
 
 module.exports = mongoose.model("Menu",menuSchema);
