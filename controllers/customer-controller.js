@@ -76,7 +76,17 @@ exports.deleteCustomer = async (req, res) => {
     }
 };
 
-
+exports.findByPhone = async(req,res)=>{
+    try{
+        const customer = await Customer.find().where('phone_no').equals(req.params.phone);
+        if(!customer){
+            return res.status(404).json({message:'Customer not found'});
+        }
+        res.status(200).json(customer);
+    }catch{
+        res.status(400).json({message:'Error in finding the Customer'});
+    }
+};s
 
 // async function getCustomer(req,res,next) {
 //     let cust 
