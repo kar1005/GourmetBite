@@ -1,4 +1,5 @@
 const Bill = require('../models/bill');
+const { findByIdAndDelete } = require('../models/orders');
 
 exports.getBills = async (req,res)=>{
     try{
@@ -20,19 +21,48 @@ exports.getBillByID = async (req,res)=>{
     }
 }
 
-// exports.addBill = async(req,res)=>{
-//     try{
-//         const mockRequest ={
-//             params:{phone:  req.body.phone},
+exports.addBill = async(req,res)=>{
+    try{
+        const bill = new Bill(req.body);
+        await bill.save();
+        res.status(200).json({message:'Bill added sucessfully'});
+    }catch(error){
+        res.status(400).json({mesaage:error.mesaage});
+    }
+}
 
-//         };
-//         const mockResponse = {
-//             status: (code) => ({
-//                 json: (data) => console.log('Mock response data:', data),
-//             }),
-//             json: (data) => console.log('Mock response data:', data),
-//         };
-//     }catch{
+exports.updateBillById = async(req,res)=>{
+    try{
+        const bill = await Bill.findByIdAndUpdate(req.params.id,req.body,{
+            new:true,
+            runValidators:true,
+        });
+        if(!bill){
+            return res.status(404).json({ message: 'Bill not found' });
+        }
+    }catch(error){
+        res.status(400).json({message:error.mesaage});
+    }
+}
 
-//     }
-// }
+exports.deleteBillById = async(req,res)=>{
+    try{
+        const bill = await Bill.findByIdAndDelete(req.params.id);
+        if(!bill){
+            res.status(200).json({message:'Bill not found'});
+        }
+    }catch(error){
+        res.status(400).json({message:error.mesaage});
+    }
+}
+
+exports.getBillByCustomer = async(req,res)=> {
+    try{
+        const bill = Bill.find().where('customer').equals(req.params.id);
+        if(!bill){
+            res.status(400).json({message:'No bills for given customer'});
+        }
+    }catch(error){
+        res.status(400).json({message:error.mesaage});
+    }
+}
