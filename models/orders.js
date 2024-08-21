@@ -9,6 +9,7 @@ const orderSchema = new Schema({
         time : {type:Date , require:true ,default: Date.now},
         completionTime : {type:Date , require:false},
         paymentMode :{type:String , require:true},
+        tableNo  : {type:Number , require:true},
     },
     // { 
     //     timestamp : true, //Adds createdAt and updatedAt fields autmatically 
