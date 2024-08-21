@@ -7,16 +7,18 @@ const Database_url = 'mongodb+srv://gourmetdevelopers:itsATprojectkk@cluster0.ks
 const customerRoutes = require('./routes/customer-routes');
 const menuRoutes = require('./routes/menu-routes');
 const feedbackRoutes = require('./routes/feedback-routes');
-// const orderRoutes = require('./routes/order-routes');
-// const inventoryRoutes = require('./routes/inventory-routes');
-// const inventoryLogRoute = require('./routes/inventoryLog-route');
+const billRoutes = require('./routes/bill-routes');
+const ordersRoutes = require('./routes/orders-routes');
+const inventoryRoutes = require('./routes/inventory-routes');
+const inventoryLogRoute = require('./routes/inventoryLog-routes');
 
 app.use("/customers", customerRoutes);
 app.use("/menu",menuRoutes);
 app.use("/feedback",feedbackRoutes);
-// app.use("/orders",orderRoutes);
-// app.use("/inventory",inventoryRoutes);
-// app.use("/inventoryLog",inventoryLogRoute);
+app.use("/bill",billRoutes)
+app.use("/orders",ordersRoutes);
+app.use("/inventory",inventoryRoutes);
+app.use("/inventoryLog",inventoryLogRoute);
 
 app.get('/',(req,res) => {
     res.send("Hello")

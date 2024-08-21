@@ -5,13 +5,13 @@ const router = express.Router();
 // Add feedback
 router.post('/', feedbackController.addFeedback);
 
-// Get feedback by user (customer ID)
+// Get feedback by user
 router.get('/user/:customerId', feedbackController.getFeedbackByUser);
 
-// Get feedback by food item (menu item ID)
+// Get feedback by food item 
 router.get('/food/:menuItemId', feedbackController.getFeedbackByFoodItem);
 
-// Get all feedback (optional route for admin view)
+// Get all feedback 
 router.get('/', feedbackController.getAllFeedbacks);
 
 // Update feedback by ID
