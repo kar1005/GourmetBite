@@ -86,7 +86,7 @@ exports.findByPhone = async(req,res)=>{
     }catch{
         res.status(400).json({message:'Error in finding the Customer'});
     }
-};s
+};
 
 // async function getCustomer(req,res,next) {
 //     let cust 
