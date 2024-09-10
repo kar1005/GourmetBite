@@ -9,7 +9,7 @@ exports.getInventory = async (req,res)=>{
     }
 };
 
-exports.getInventoryByID = async (req,res)=>{
+exports.getInventoryById = async (req,res)=>{
     try{
         const  item = Inventory.findById(req.params.id);
         if(!item){

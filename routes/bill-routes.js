@@ -3,13 +3,13 @@ const billController = require("../controllers/bill-controller");
 const router = express.Router();
 
 //get all bill
-router.get('/',billContoller.getBills);
+router.get('/', billController.getBills);
 
 //get bill by id
-router.get('/:id',billController.getBillByID);
+router.get('/:id', billController.getBillByID);
 
 //get bill by customer
-router.get('/customer/:id',billContoller.getBillByCustomer);
+router.get('/customer/:id', billController.getBillByCustomer);
 
 //create bill
 router.post('/',billController.addBill);

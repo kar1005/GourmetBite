@@ -9,7 +9,7 @@ exports.getInventoryLog = async (req,res)=>{
     }
 };
 
-exports.getInventoryLogByID = async (req,res)=>{
+exports.getInventoryLogById = async (req,res)=>{
     try{
         const  ilog = InventoryLog.findById(req.params.id);
         if(!ilog){
