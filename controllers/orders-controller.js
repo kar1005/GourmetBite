@@ -1,6 +1,6 @@
 const Order = require('../models/orders.js');
 
-exports.addOrder = async(req,res)=>{
+exports.addOrders = async(req,res)=>{
     try{
         const  order = new Order(req.body);
         await order.save();
@@ -19,7 +19,7 @@ exports.getOrders = async (req,res)=>{
     }
 };
 
-exports.getOrderByID = async (req,res)=>{
+exports.getOrderById = async (req,res)=>{
     try{
         const  order = Order.findById(req.params.id);
         if(!order){
@@ -67,6 +67,32 @@ exports.getPendingOrders = async(req,res)=>{
     }
 }
 
+exports.getOrdersByCustomer = async (req,res)=> {
+    try {
+        const orders = await Order.find().where('customer').equals(req.params.id);
+        if(!orders){
+            res.status(200).send({message: 'No orders placed by this customer till date'});
+        }
+        res.status(200).json({orders,message: 'Orders of the given customer'});
+    }catch{
+        res.status(500).send({message: 'Error fetching orders for given customer'});
+    }
+}
+
+exports.getPendingOrdersByTable = async(req,res)=>{
+    try{
+        const orders = await Order.find({
+            tableNo : req.params.tableno,
+            status : 'pending'
+        });
+        if(!orders){
+            req.status(200).send({message: 'No Pending orders for given table number'});
+        }
+        res.status(200).send({orders,message:'Pending orders of the given table'});
+    }catch{
+        res.status(500).send({message: 'Error fetching orders for given table'});
+    }
+}
 // exports.getPendingOrdersByTable = async(req,res)=>{
 //     try{
 //         const orders = await Order.find().where('status').equals('pending');

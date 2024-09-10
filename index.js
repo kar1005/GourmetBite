@@ -5,8 +5,12 @@ const app = express()
 app.use(express.json())
 
 const PORT = 5000
+<<<<<<< HEAD
 const Database_url = 'mongodb+srv://gourmetdevelopers:itsATprojectkk@cluster0.ksb38.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
 
+=======
+const Database_url = 'mongodb+srv://gourmetdevelopers:<db_password>@cluster0.ksb38.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+>>>>>>> c5525f903e60837d5bfa07aedf15de7dbbdc7ed3
 const customerRoutes = require('./routes/customer-routes');
 const menuRoutes = require('./routes/menu-routes');
 const feedbackRoutes = require('./routes/feedback-routes');
