@@ -17,4 +17,6 @@ router.patch('/:id',customerController.updateCustomer);
 // Delete a customer by ID
 router.delete('/:id', customerController.deleteCustomer);
 
+router.get('/phone/:phone',customerController.findByPhone);
+
 module.exports = router;
