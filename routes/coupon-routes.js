@@ -6,7 +6,7 @@ const router = express.Router();
 router.get('/',couponController.getCoupons);
 
 //get coupon by id
-router.get('/:id',couponController.getCouponsById);
+router.get('/:id',couponController.getCouponByID);
 
 //get coupons by customer
 router.get('/customer/:id',couponController.getCouponsByCustomer);
@@ -15,10 +15,11 @@ router.get('/customer/:id',couponController.getCouponsByCustomer);
 router.post('/',couponController.addCoupon);
 
 //update coupon
-router.patch('/:id',couponController.updateCouponById);
+router.patch('/:id',couponController.updateCoupon);
 
 //delete coupon
-router.delete('/:id',couponController.deleteCouponById);
+router.delete('/:id',couponController.deleteById);
 
 
-moudle.exports = router;
+module.exports = router;
+// moudle.exports = router;

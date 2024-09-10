@@ -6,13 +6,13 @@ const router = express.Router();
 router.get('/',partyBookingController.getPartyBooking);
 
 //get party by id 
-router.get('/:id',partyBookingController.getPartyBookingById);
+router.get('/:id',partyBookingController.getPartyBookingByID);
 
 //add party
 router.post('/',partyBookingController.addPartyBooking);
 
 //update party
-router.patch('/:id',partyBookingController.updatepPartyBookingById);
+router.patch('/:id',partyBookingController.updatePartyBookingById);
 
 //delete party
 router.post('/:id',partyBookingController.deletePartyBookingById);
