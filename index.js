@@ -31,8 +31,6 @@ app.use("/partyBooking",partyBookingRoutes);
 app.use("/tableBooking",tableBookingRoutes);
 
 
-
-
 app.get('/',(req,res) => {
     res.send("Hello")
 })

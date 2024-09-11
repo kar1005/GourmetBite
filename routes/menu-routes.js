@@ -23,5 +23,7 @@ router.patch('/:id',menuController.updateFoodItem);
 //delete food item
 router.delete('/:id',menuController.deleteFoodItem);
 
+router.use('/',menuController.error)
+
 module.exports = router;
 
