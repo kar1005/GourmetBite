@@ -20,4 +20,6 @@ router.patch('/:id', feedbackController.updateFeedback);
 // Delete feedback by ID
 router.delete('/:id', feedbackController.deleteFeedback);
 
+router.use('/',feedbackController.NotValidRoute);
+
 module.exports = router

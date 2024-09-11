@@ -17,4 +17,6 @@ router.patch('/:id',tableBookingController.updateTableBookingById);
 //delete party
 router.post('/:id',tableBookingController.deleteTableBookingById);
 
+router.use('/',tableBookingController.NotValidRoute);
+
 module.exports = router;

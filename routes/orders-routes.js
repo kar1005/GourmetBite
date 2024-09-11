@@ -26,5 +26,7 @@ router.patch('/:id',ordersController.updateOrderById);
 //Delete Order
 router.delete('/:id',ordersController.deleteOrderById);
 
+router.use('/',ordersController.NotValidRoute);
+
 
 module.exports = router;

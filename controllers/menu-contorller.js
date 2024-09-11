@@ -82,6 +82,6 @@ exports.deleteFoodItem = async(req,res) => {
     }
 }
 
-exports.error = async(req,res) => {
+exports.NotValidRoute = async(req,res) => {
     res.status(400).json({ message: "Enter Valid Route" });
 }

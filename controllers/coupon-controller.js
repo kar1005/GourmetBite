@@ -66,3 +66,7 @@ exports.getCouponsByCustomer = async(req,res)=>{
         res.status(500).send({mesaage:'Error fetching coupon'});
     }
 }
+
+exports.NotValidRoute = async(req,res) => {
+    res.status(400).json({ message: "Enter Valid Route" });
+}

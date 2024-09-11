@@ -20,6 +20,7 @@ router.patch('/:id',couponController.updateCoupon);
 //delete coupon
 router.delete('/:id',couponController.deleteById);
 
+router.use('/',couponController.NotValidRoute);
 
 module.exports = router;
 // moudle.exports = router;

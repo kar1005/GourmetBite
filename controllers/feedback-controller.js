@@ -77,3 +77,7 @@ exports.deleteFeedback = async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 };
+
+exports.NotValidRoute = async(req,res) => {
+    res.status(400).json({ message: "Enter Valid Route" });
+}

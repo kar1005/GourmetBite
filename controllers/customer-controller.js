@@ -88,6 +88,10 @@ exports.findByPhone = async(req,res)=>{
     }
 };
 
+exports.NotValidRoute = async(req,res) => {
+    res.status(400).json({ message: "Enter Valid Route" });
+}
+
 // async function getCustomer(req,res,next) {
 //     let cust 
 //     try {

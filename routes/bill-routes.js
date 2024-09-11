@@ -20,4 +20,6 @@ router.patch('/:id',billController.updateBillById);
 //delete bill
 router.delete('/:id',billController.deleteBillById);
 
+router.use('/',billController.NotValidRoute);
+
 module.exports = router

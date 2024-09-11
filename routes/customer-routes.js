@@ -19,4 +19,6 @@ router.delete('/:id', customerController.deleteCustomer);
 
 router.get('/phone/:phone',customerController.findByPhone);
 
+router.use('/',customerController.NotValidRoute);
+
 module.exports = router;

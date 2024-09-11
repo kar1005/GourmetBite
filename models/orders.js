@@ -11,9 +11,6 @@ const orderSchema = new Schema({
         paymentMode :{type:String , require:true},
         tableNo  : {type:Number , require:true},
     },
-    // { 
-    //     timestamp : true, //Adds createdAt and updatedAt fields autmatically 
-    // }
 );
 
 module.exports = mongoose.model("Orders",orderSchema);

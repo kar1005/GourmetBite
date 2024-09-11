@@ -23,7 +23,7 @@ router.patch('/:id',menuController.updateFoodItem);
 //delete food item
 router.delete('/:id',menuController.deleteFoodItem);
 
-router.use('/',menuController.error)
+router.use('/',menuController.NotValidRoute)
 
 module.exports = router;
 

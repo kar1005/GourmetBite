@@ -93,6 +93,10 @@ exports.getPendingOrdersByTable = async(req,res)=>{
         res.status(500).send({message: 'Error fetching orders for given table'});
     }
 }
+
+exports.NotValidRoute = async(req,res) => {
+    res.status(400).json({ message: "Enter Valid Route" });
+}
 // exports.getPendingOrdersByTable = async(req,res)=>{
 //     try{
 //         const orders = await Order.find().where('status').equals('pending');

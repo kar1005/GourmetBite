@@ -17,4 +17,6 @@ router.patch('/:id',inventoryLogController.updateInventoryLogById);
 //deleteingredient
 router.post('/:id',inventoryLogController.deleteInventoryLogById);
 
+router.use('/',inventoryLogController.NotValidRoute);
+
 module.exports = router;
