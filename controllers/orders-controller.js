@@ -55,7 +55,7 @@ exports.deleteOrderById = async(req,res)=>{
     }
 }
 
-exports.getPendingOrders = async(req,res)=>{
+exports.getPendingOrders = async (req,res)=>{
     try{
         const orders = await Order.find().where('status').equals('pending');
         if(!orders){

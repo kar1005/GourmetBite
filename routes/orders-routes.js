@@ -5,17 +5,17 @@ const router = express.Router();
 //get all orders
 router.get('/',ordersController.getOrders);
 
-//get orders by id
-router.get('/:id',ordersController.getOrderById);
-
-//get orders by customer 
-router.get('/customer/:id',ordersController.getOrdersByCustomer);
-
 //get order which are pending
 router.get('/pending',ordersController.getPendingOrders);
 
 //get pending orders by table number
 router.get('/pending/:tableno',ordersController.getPendingOrdersByTable);
+
+//get orders by id
+router.get('/:id',ordersController.getOrderById);
+
+//get orders by customer 
+router.get('/customer/:id',ordersController.getOrdersByCustomer);
 
 //Create Order
 router.post('/',ordersController.addOrders);
