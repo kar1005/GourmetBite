@@ -1,0 +1,36 @@
+/* Home Styles*/ 
+.hero_section {
+    background-image: url("../../../assets/mern2.jpg");
+    position: relative;
+    background-size: cover;
+    background-attachment: fixed;
+    padding-top: 170px;
+    padding-bottom: 90px;
+    height: 100vh;
+    background-size: cover;
+}
+
+.hero_section .hero_text h1{
+    font-size: 3.7rem;
+    line-height: 1;
+    margin-bottom: 15px;
+    letter-spacing:3px ;
+}
+
+.hero_section .hero_text h3{
+    padding: 0 5%;
+    font-size: 1.8rem;
+    color:var(--light-grey);
+    text-transform: capitalize;
+    padding-top: 30px;
+}
+
+/*Media Query Mobiles*/
+@media(max-width:767px){
+    .hero_section .hero_text h1{
+        font-size: 2rem;
+    }
+    .hero_section .hero_text h3{
+        font-size: 1.3rem;
+    }
+}
