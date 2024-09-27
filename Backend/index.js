@@ -1,8 +1,16 @@
 const express = require("express")
 const mongoose = require("mongoose")
-
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const path = require('path');
 const app = express()
+
 app.use(express.json())
+app.use(cors());
+app.use(bodyParser.json());
+
+// Serve static files from the uploads directory
+app.use('/uploads', express.static('uploads'));
 
 const PORT = 5000
 const Database_url = 'mongodb+srv://gourmetdevelopers:itsATprojectkk@cluster0.ksb38.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
