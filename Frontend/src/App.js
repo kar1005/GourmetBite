@@ -8,6 +8,8 @@ import Menu from './components/pages/Menu/Menu';
 import UpdateMenu from './components/Admin/updateMenu/DisplayUpdateMenu';
 import UpdateItemForm from './components/Admin/updateMenu/UpdateItemForm';
 import CartPage from './components/pages/Menu/cart/CartPage';
+import RazorpayPayment from './components/payment/RazorpayPayment';
+
 function App() {
   return (
     <>
@@ -21,7 +23,7 @@ function App() {
             <Route path='/admin/updateMenu' element={<UpdateMenu/>}/>
             <Route path='/admin/updateItemForm' element={<UpdateItemForm/>}/>
             <Route path='/cart' element={<CartPage/>}/>
-
+            <Route path="/razorpay" element={<RazorpayPayment />} />
 
           </Routes>
         </Router>

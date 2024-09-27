@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const CartPage = () => {
@@ -14,6 +15,8 @@ const CartPage = () => {
   const [discount, setDiscount] = useState(0);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState({ name: '', phone: '' });
+
+  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
     const newSubtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -35,7 +38,6 @@ const CartPage = () => {
   };
 
   const applyCoupon = () => {
-    // This is a mock function. In a real app, you'd validate the coupon with the backend.
     if (coupon === 'DISCOUNT10') {
       setDiscount(subtotal * 0.1);
     } else {
@@ -44,12 +46,17 @@ const CartPage = () => {
   };
 
   const handleLogin = () => {
-    // This is a mock login. In a real app, you'd implement actual authentication.
     setIsLoggedIn(true);
     setUserInfo({ name: 'John Doe', phone: '123-456-7890' });
   };
 
-  const total = subtotal + 5 - discount; // 5 is the delivery fee
+  const handleCheckout = () => {
+    if (isLoggedIn && tableNumber) {
+      navigate('/razorpay'); // Navigate to the Razorpay payment page
+    }
+  };
+
+  const total = subtotal + 5 - discount; // 5 is the service fee
 
   return (
     <div className="container py-5">
@@ -152,7 +159,7 @@ const CartPage = () => {
                 ) : (
                   <button className="btn btn-secondary w-100 mb-3" onClick={handleLogin}>Login to Proceed</button>
                 )}
-                <button className="btn btn-primary w-100" disabled={!isLoggedIn || !tableNumber}>
+                <button className="btn btn-primary w-100" onClick={handleCheckout} disabled={!isLoggedIn || !tableNumber}>
                   Proceed to Checkout
                 </button>
               </div>

@@ -25,6 +25,7 @@ const inventoryLogRoute = require('./routes/inventoryLog-routes');
 const couponRoutes = require('./routes/coupon-routes');
 const partyBookingRoutes = require('./routes/partyBooking-routes');
 const tableBookingRoutes = require('./routes/tableBooking-routes');
+const paymentRoutes = require('./payment/payment-routes');
 
 
 app.use("/customers", customerRoutes);
@@ -37,6 +38,8 @@ app.use("/inventoryLog",inventoryLogRoute);
 app.use("/coupon",couponRoutes);
 app.use("/partyBooking",partyBookingRoutes);
 app.use("/tableBooking",tableBookingRoutes);
+app.use("/paymentroutes",paymentRoutes);
+
 
 
 app.get('/',(req,res) => {
