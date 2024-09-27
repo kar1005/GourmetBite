@@ -8,8 +8,12 @@ const orderSchema = new Schema({
         status : {type:String , require:true},
         time : {type:Date , require:true ,default: Date.now},
         completionTime : {type:Date , require:false},
-        paymentMode :{type:String , require:true},
+        paymentMode :{type:String , require:false},
         tableNo  : {type:Number , require:true},
+
+        amount: { type: Number, required: true },
+        paymentId: { type: String },
+        Paymentstatus: { type: String, required: true },
     },
 );
 
