@@ -17,11 +17,23 @@ function Signup() {
                         id="name"
                         placeholder='Enter your name '
                     />
-                    <label htmlFor='email'>Email</label>
+                    <label htmlFor='email'>Contact No.</label>
                     <input
-                        type="email"
-                        id="email"
-                        placeholder='Enter your email '
+                        type="number"
+                        id="phone"
+                        placeholder='Enter your contact no. '
+                    />
+                    <label htmlFor='email'>BirthDate</label>
+                    <input
+                        type="date"
+                        id="dob"
+                        placeholder='Enter your birthdate '
+                    />
+                    <label htmlFor='email'>Profile Picture</label>
+                    <input
+                        type="file"
+                        id="profile"
+                        placeholder='Enter your profile photo '
                     />
                     <label htmlFor='password'>Password</label>
                     <input
@@ -34,7 +46,7 @@ function Signup() {
             </form>
             <div className="login">
                 <p>Already have an account?</p>
-                <Link to="/login" className="btn btn-primary" >
+                <Link to="/login" className="btn btn-primary center" >
                     Login
                 </Link>
             </div>

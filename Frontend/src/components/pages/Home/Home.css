@@ -17,10 +17,20 @@
     letter-spacing:3px ;
 }
 
+.text-black{
+    font-size:90px;
+    text-decoration: solid;
+}
+
+.hero_text{
+    margin-left: -80px;
+    margin-top: -50px;
+}
+
 .hero_section .hero_text h3{
     padding: 0 5%;
     font-size: 1.8rem;
-    color:var(--light-grey);
+    color:var(--white);
     text-transform: capitalize;
     padding-top: 30px;
 }

@@ -9,11 +9,9 @@ function Section1() {
     <section className='hero_section'>
         <Container>
             <Row>
-                <Col>
-                </Col>
                 <Col lg={5}>
                     <div className="hero_text text-center me">
-                        <h1 className="text-white">Welcome to our restaurant</h1>
+                        <h1 className="text-black">Welcome to our restaurant</h1>
                         <h3 className="pt-2 pb-4">
                             Get the best Dine-in experience with our Restaurant.
                         </h3>
