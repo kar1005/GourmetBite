@@ -1,21 +1,15 @@
 const express = require("express")
 const cors = require('cors');
 const mongoose = require("mongoose")
-<<<<<<< HEAD
+
 
 
 const app = express();
 
 app.use(cors());
-=======
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
-const app = express()
-
->>>>>>> e9c7dace0916cd3f83caf5d87a946cc4b59f6c88
-app.use(express.json())
-app.use(cors());
 app.use(bodyParser.json());
 
 // Serve static files from the uploads directory
@@ -36,11 +30,8 @@ const inventoryLogRoute = require('./routes/inventoryLog-routes');
 const couponRoutes = require('./routes/coupon-routes');
 const partyBookingRoutes = require('./routes/partyBooking-routes');
 const tableBookingRoutes = require('./routes/tableBooking-routes');
-<<<<<<< HEAD
 const contactusRoutes = require('./routes/contactus-routes')
-=======
 const paymentRoutes = require('./payment/payment-routes');
->>>>>>> e9c7dace0916cd3f83caf5d87a946cc4b59f6c88
 
 
 app.use("/customers", customerRoutes);
@@ -53,13 +44,8 @@ app.use("/inventoryLog",inventoryLogRoute);
 app.use("/coupon",couponRoutes);
 app.use("/partyBooking",partyBookingRoutes);
 app.use("/tableBooking",tableBookingRoutes);
-<<<<<<< HEAD
 app.use("/contactus",contactusRoutes);
-=======
 app.use("/paymentroutes",paymentRoutes);
-
-
->>>>>>> e9c7dace0916cd3f83caf5d87a946cc4b59f6c88
 
 app.get('/',(req,res) => {
     res.send("Hello")
