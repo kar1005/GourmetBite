@@ -99,3 +99,53 @@
     padding: 3px 8px;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+/*ONLY FOR MENU CART _ USER*/
+
+.cart-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #ff3b6c;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+.cart-footer button {
+  background-color: white;
+  color: #ff3b6c;
+  border: none;
+  padding: 10px 20px;
+  margin-bottom: 5px;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100px;
+  margin-top: auto;
+}
+
+.quantity-control button {
+  background-color: #ff3b6c;
+  color: white;
+  border: none;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

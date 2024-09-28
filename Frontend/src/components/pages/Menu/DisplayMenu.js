@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import MenuItemList from '../../shared/SharedMenu/MenuItemList';
+import MenuItemList from './MenuItemList';
 import CategoriesSidebar from '../../shared/SharedMenu/categoriesSideBar';
 import SearchBar from '../../shared/SharedMenu/searchBar';
 
@@ -13,10 +13,12 @@ function DisplayMenu() {
   const [activeCategory, setActiveCategory] = useState('');
   const [filteredFoodItems, setFilteredFoodItems] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  
+  const [cartItems, setCartItems] = useState({});
+
   // Create refs for each category section
   const categoryRefs = useRef({});
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -43,10 +45,63 @@ function DisplayMenu() {
     fetchCategories();
   }, []);
 
+  useEffect(() => {
+    // Restore cart state from location state when navigating back from cart page
+    if (location.state && location.state.cartItems) {
+      setCartItems(location.state.cartItems);
+    } else {
+      // Restore cart state from local storage
+      const savedCartItems = localStorage.getItem('cartItems');
+      if (savedCartItems) {
+        setCartItems(JSON.parse(savedCartItems));
+      }
+    }
+  }, [location]);
+
+  useEffect(() => {
+    // Save cart items to local storage whenever cartItems changes
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  // const handleAddToCart = (item) => {
+  //   setCartItems((prevItems) => ({
+  //     ...prevItems,
+  //     [item._id]: (prevItems[item._id] || 0) + 1,
+  //   }));
+  // };
+
+  const handleAddToCart = (item) => {
+    setCartItems((prevItems) => {
+      const updatedItems = {
+        ...prevItems,
+        [item._id]: (prevItems[item._id] || 0) + 1,
+      };
+      localStorage.setItem('cartItems', JSON.stringify(updatedItems));
+      localStorage.setItem(`foodItem_${item._id}`, JSON.stringify(item));
+      return updatedItems;
+    });
+  };
+
+  const handleRemoveFromCart = (item) => {
+    setCartItems((prevItems) => {
+      const updatedItems = { ...prevItems };
+      if (updatedItems[item._id] > 1) {
+        updatedItems[item._id]--;
+      } else {
+        delete updatedItems[item._id];
+      }
+      localStorage.setItem('cartItems', JSON.stringify(updatedItems));
+      return updatedItems;
+    });
+  };
+
+  const handleCartNavigation = () => {
+    navigate('/cart', { state: { cartItems } });
+  };
+
   if (loading) return <div>Loading categories...</div>;
   if (error) return <div>Error: {error}</div>;
 
-  // Handle category click (scroll to the respective section)
   const handleCategoryClick = (category) => {
     const categoryRef = categoryRefs.current[category];
     if (categoryRef) {
@@ -55,7 +110,6 @@ function DisplayMenu() {
     }
   };
 
-  // Update active category when food items scroll
   const handleScroll = () => {
     let closestCategory = null;
     let minDistance = Infinity;
@@ -76,7 +130,6 @@ function DisplayMenu() {
     }
   };
 
-
   const handleSearch = (term) => {
     setSearchTerm(term);
     if (term) {
@@ -89,13 +142,6 @@ function DisplayMenu() {
     } else {
       setFilteredFoodItems(foodItems);
     }
-  };
-
-
-
-  //Redirect
-  const handleEditClick = (item) => {
-    navigate(`/admin/updateItemForm`, { state: { item } });
   };
 
   return (
@@ -133,14 +179,24 @@ function DisplayMenu() {
               className="scrollable-container"
               onScroll={handleScroll}
             >
-              
+{/*               
             <MenuItemList
             categories={categories}
             foodItems={filteredFoodItems}
             categoryRefs={categoryRefs}
             handleEditClick={handleEditClick}
             searchTerm={searchTerm}
-          />
+          /> */}
+      <MenuItemList
+        categories={categories}
+        foodItems={filteredFoodItems}
+        categoryRefs={categoryRefs}
+        searchTerm={searchTerm}
+        cartItems={cartItems}
+        onAddToCart={handleAddToCart}
+        onRemoveFromCart={handleRemoveFromCart}
+        onCartNavigation={handleCartNavigation}
+      />
               
             </div>
           </main>
