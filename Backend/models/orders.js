@@ -8,7 +8,7 @@ const orderSchema = new Schema({
         itemId: { type: mongoose.Types.ObjectId, required: true, ref: 'MenuItem' },
         qty: { type: Number, required: true }
     }],
-    notes: { type: String, required: true },
+    notes: { type: String, required: false },
     status: { type: String, required: true },
     tableNo: { type: Number, required: true }, // Changed to String to match your input
     amount: { type: Number, required: true },
