@@ -1,8 +1,14 @@
 const express = require("express")
+const cors = require('cors');
 const mongoose = require("mongoose")
 
-const app = express()
+
+const app = express();
+
+app.use(cors());
 app.use(express.json())
+
+
 
 const PORT = 5000
 const Database_url = 'mongodb+srv://gourmetdevelopers:itsATprojectkk@cluster0.ksb38.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
@@ -17,6 +23,7 @@ const inventoryLogRoute = require('./routes/inventoryLog-routes');
 const couponRoutes = require('./routes/coupon-routes');
 const partyBookingRoutes = require('./routes/partyBooking-routes');
 const tableBookingRoutes = require('./routes/tableBooking-routes');
+const contactusRoutes = require('./routes/contactus-routes')
 
 
 app.use("/customers", customerRoutes);
@@ -29,7 +36,7 @@ app.use("/inventoryLog",inventoryLogRoute);
 app.use("/coupon",couponRoutes);
 app.use("/partyBooking",partyBookingRoutes);
 app.use("/tableBooking",tableBookingRoutes);
-
+app.use("/contactus",contactusRoutes);
 
 app.get('/',(req,res) => {
     res.send("Hello")

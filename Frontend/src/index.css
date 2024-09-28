@@ -4,8 +4,8 @@
   --dark-black: #000;
   --light-grey: #dddddd;
   --white: #fff;
-  --golden: #daa520;
-  --red: #e60000;
+  --golden: #daa520; /*hover effect*/
+  --red: #e60000; /* buttons and text highlight */
 }
 
 html,body{
@@ -86,3 +86,4 @@ a{
   color: var(--black);
   border-color: var(--red);
 }
+

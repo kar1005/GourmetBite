@@ -10,11 +10,11 @@ function Login() {
             <h3>Login</h3>
             <form action="" className="addUSerForm">
                 <div className="inputGroup">
-                    <label htmlFor='email'>Email</label>
+                    <label htmlFor='email'>Contact No.</label>
                     <input
-                        type="email"
-                        id="email"
-                        placeholder='Enter your email '
+                        type="number"
+                        id="phone"
+                        placeholder='Enter your contact no. '
                     />
                     <label htmlFor='password'>Password</label>
                     <input

@@ -1,22 +1,21 @@
 .signup-container{
-    background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../../assets/mern1.jpg");
     background-size: cover;
     background-position: center;
     display: flex;
-    height: 105vh;
-    
 }
 .addUser h3{
     text-align: center;
      font-weight: bold;
 }
 .addUser{
-    width:25%;
+    width:80%;
     margin: 50px auto;
     background-color: var(--white);
-    padding: 40px;
+    padding: 20px;
     border-radius: 10px;
     box-shadow: 1px 1px 8px rgba(0,0,0);
+    box-sizing: content-box;
+    height: fit-content;
 }
 
 .addUSerForm .inputGroup{
@@ -38,12 +37,11 @@
     margin-top: 25px;
 }
 
-.login{
+.signup{
     margin-top: 25px;
     text-align: center;
 }
 
 .login .btn .btn-primary{
     width: 50%;
-
 }
