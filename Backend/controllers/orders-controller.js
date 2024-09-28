@@ -1,14 +1,18 @@
 const Order = require('../models/orders.js');
 
-exports.addOrders = async(req,res)=>{
-    try{
-        const  order = new Order(req.body);
+exports.addOrders = async (req, res) => {
+    try {
+        // console.log("Reached Here");
+        // console.log(req.body);
+
+        const order = new Order(req.body);
         await order.save();
-        res.status(200).json({message:'Order added successfully',order:order});
-    }catch{
-        res.status(400).json({message:'Error adding order'});
+        res.status(200).json({ message: 'Order added successfully', order: order });
+    } catch (error) {
+        console.error('Error adding order:', error);
+        res.status(400).json({ message: 'Error adding order', error: error.message });
     }
-}
+};
 
 exports.getOrders = async (req,res)=>{
     try{
@@ -22,6 +26,8 @@ exports.getOrders = async (req,res)=>{
 exports.getOrderById = async (req,res)=>{
     try{
         const  order = Order.findById(req.params.id);
+        res.status(200).json(order);
+
         if(!order){
             res.status(404).send({message:'Order not found'});
         }
@@ -36,9 +42,7 @@ exports.updateOrderById = async(req,res)=>{
             new:true,
             runValidators:true,
         });
-        if(!order){
-            return res.status(404).json({ message: 'Order not found' });
-        }
+        res.status(200).json(order);
     }catch(error){
         res.status(400).json({message:error.mesaage});
     }
@@ -48,7 +52,7 @@ exports.deleteOrderById = async(req,res)=>{
     try{
         const order = await findByIdAndDelete(req.params.id);
         if(!order){
-            res.status(200).json({message:'Order not found'});
+            res.status(404).json({message:'Order not found'});
         }
     }catch(error){
         res.status(400).json({message:error.mesaage});

@@ -1,5 +1,18 @@
 const Menu = require('../models/menu');
+const multer = require('multer');
+// const bodyParser = require('body-parser');
 
+exports.getCategories = async(req,res) =>{
+    try {
+        const categories = await Menu.distinct('category');
+        if(!categories){
+            res.status(404).json({message:"categories not found"})
+        }
+        res.status(200).json(categories);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
 
 exports.creatFoodItem = async(req,res) => {
     try {
@@ -56,7 +69,24 @@ exports.getAllFoodItems = async(req,res) => {
 }
 exports.updateFoodItem = async(req,res) => {
     try {
-        const updatedMenuItem = await Menu.findByIdAndUpdate(req.params.id, req.body, {
+        const data = JSON.parse(req.body.data); // Parse the JSON data
+        const imagePath = req.file ? req.file.path : null;
+
+        console.log(data);
+        console.log(req.file);
+        
+        const updatedItem = {
+            category: data.category,
+            foodName: data.foodName,
+            price: data.price,
+            description: data.description,
+            rating: data.rating,
+            allergyIngredients: data.allergyIngredients,
+            availability: data.availability,
+            image: imagePath // Use the uploaded file path if it exists
+          };
+
+        const updatedMenuItem = await Menu.findByIdAndUpdate(req.params.id, updatedItem, {
             new: true,
             runValidators: true,
         });
