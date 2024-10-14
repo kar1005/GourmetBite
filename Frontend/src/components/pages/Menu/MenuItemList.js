@@ -3,22 +3,23 @@ import { Card, Row, Col, Button } from 'react-bootstrap';
 import '../../shared/SharedMenu/itemCard.css';
 
 function renderStars(rating) {
-  const fullStars = Math.floor(rating);
-  const halfStars = rating % 1 !== 0 ? 1 : 0;
-  const emptyStars = 5 - fullStars - halfStars;
+  const fullStars = Math.floor(rating); // Number of full stars
+  const halfStars = rating % 1 !== 0 ? 1 : 0; // 1 if there's a half star, 0 otherwise
+  const emptyStars = 5 - fullStars - halfStars; // Remaining empty stars
 
   return (
     <>
       {[...Array(fullStars)].map((_, i) => (
         <span key={`full-${i}`} className="star">★</span>
       ))}
-      {halfStars > 0 && <span className="star">☆</span>}
+      {halfStars > 0 && <span className="star half-star">★</span>}
       {[...Array(emptyStars)].map((_, i) => (
         <span key={`empty-${i}`} className="star">☆</span>
       ))}
     </>
   );
 }
+
 
 function MenuItemList({ 
   categories, 

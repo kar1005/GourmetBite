@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import RazorpayPayment from '../../../payment/RazorpayPayment';
 const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);
   const [subtotal, setSubtotal] = useState(0);
@@ -10,8 +11,8 @@ const CartPage = () => {
   const [discount, setDiscount] = useState(0);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState({ name: '', phone: '' });
-  const [orderNotes, setOrderNotes] = useState(''); // New state for order notes
-  const [savedNotes, setSavedNotes] = useState(''); // New state to store the saved notes
+  const [orderNotes, setOrderNotes] = useState('');
+  const [savedNotes, setSavedNotes] = useState(''); 
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -79,14 +80,11 @@ const CartPage = () => {
     const orderData = {
         customer: '66e088db398f488807011453', // Replace with actual customer ID
         items: cartItems.map(item => ({ itemId: item._id, qty: item.quantity })),
-        notes: savedNotes, // Use the saved notes
+        notes: savedNotes,
         status: "Payment Pending",
         tableNo: tableNumber,
-        // paymentMode: '', // Keep empty or set according to your logic
-        amount: total, // Use the calculated total amount
-        // paymentId: '', // Keep empty or set according to your logic
-        // paymentStatus: '', // Keep empty or set according to your logic
-        // time: new Date(), // Use current date and time
+        amount: total,
+
     };
     console.log(orderData);
     
@@ -109,7 +107,6 @@ const CartPage = () => {
         // Navigate to the order confirmation page or show a success message
     } catch (error) {
         console.error('Error creating order:', error);
-        // Handle error (e.g., show error message to the user)
     }
     console.log("Return from order");
     
@@ -121,7 +118,6 @@ const CartPage = () => {
     if (isLoggedIn && tableNumber) {
       
       await createOrder();
-      // navigate('/razorpay');
     }
   };
 
@@ -133,7 +129,7 @@ const CartPage = () => {
   };
 
   const handleAddNote = () => {
-    setSavedNotes(orderNotes); // Save the input to the savedNotes state
+    setSavedNotes(orderNotes);
     alert("Note added to the order!");
   };
 

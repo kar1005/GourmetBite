@@ -10,6 +10,8 @@ import UpdateMenu from './components/Admin/updateMenu/DisplayUpdateMenu';
 import UpdateItemForm from './components/Admin/updateMenu/UpdateItemForm';
 import CartPage from './components/pages/Menu/cart/CartPage';
 import RazorpayPayment from './components/payment/RazorpayPayment';
+import KitchenHome from './components/Kitchen/KitchenHome';
+import MyOrders from './components/pages/MyOrders/myOrders';
 
 function App() {
   return (
@@ -26,6 +28,9 @@ function App() {
             <Route path='/admin/updateItemForm' element={<UpdateItemForm/>}/>
             <Route path='/cart' element={<CartPage/>}/>
             <Route path="/razorpay" element={<RazorpayPayment />} />
+            <Route path="/myOrders" element={<MyOrders/>}/>
+            <Route path="/kitchen/home" element={<KitchenHome />} />
+
           </Routes>
         </Router>
       </div>

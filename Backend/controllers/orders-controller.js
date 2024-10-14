@@ -1,10 +1,8 @@
 const Order = require('../models/orders.js');
+const Menu = require('./menu-contorller.js');
 
 exports.addOrders = async (req, res) => {
     try {
-        // console.log("Reached Here");
-        // console.log(req.body);
-
         const order = new Order(req.body);
         await order.save();
         res.status(200).json({ message: 'Order added successfully', order: order });
@@ -59,15 +57,96 @@ exports.deleteOrderById = async(req,res)=>{
     }
 }
 
-exports.getPendingOrders = async (req,res)=>{
+exports.getreceivedOrders = async (req,res)=>{
     try{
-        const orders = await Order.find().where('status').equals('pending');
+        const rawOrders = await Order.find().where('status').equals('Order Received');        
+        let intemsObjectArray=[];
+        let orders=[];
+        let temp;
+
+       for (let i = 0; i < rawOrders.length ; i++) {
+           console.log(rawOrders);            
+        for (let j = 0; j < rawOrders[i].items.length ; j++)
+        {
+            id = rawOrders[i].items[j].itemId;
+            const item = await Menu.getFoodByIdOrders(id);
+            temp = {
+                itemName:item.foodName,
+                quantity:rawOrders[i].items[j].qty
+            }
+            intemsObjectArray.push(temp);
+        } 
+        let finalobject = {
+            id: rawOrders[i]._id,
+            status:rawOrders[i].status,
+            tableNo :rawOrders[i].tableNo,
+            items : intemsObjectArray,
+            notes:rawOrders[i].notes,
+            time:rawOrders[i].time
+        };
+        orders.push(finalobject);
+        intemsObjectArray=[];
+        finalobject=[];
+       }
+
         if(!orders){
             res.status(200).send({message: 'No pending orders'});
         }
-        res.status(200).json({orders,message: 'Pending orders'});
+        res.status(200).json(orders);
     }catch{
         res.status(500).send({message: 'Error fetching orders'});
+    }
+}
+
+exports.getacceptedOrders = async (req,res)=>{
+    try{
+        const rawOrders = await Order.find().where('status').equals('Order Accepted');        
+        let intemsObjectArray=[];
+        let orders=[];
+        let temp;
+
+       for (let i = 0; i < rawOrders.length ; i++) {
+           console.log(rawOrders);            
+        for (let j = 0; j < rawOrders[i].items.length ; j++)
+        {
+            id = rawOrders[i].items[j].itemId;
+            const item = await Menu.getFoodByIdOrders(id);
+            temp = {
+                itemName:item.foodName,
+                quantity:rawOrders[i].items[j].qty
+            }
+            intemsObjectArray.push(temp);
+        } 
+        let finalobject = {
+            id: rawOrders[i]._id,
+            status:rawOrders[i].status,
+            tableNo :rawOrders[i].tableNo,
+            items : intemsObjectArray,
+            notes:rawOrders[i].notes,
+            time:rawOrders[i].time
+        };
+        orders.push(finalobject);
+        intemsObjectArray=[];
+        finalobject=[];
+       }      
+        if(!orders){
+            res.status(200).send({message: 'No Accepted orders'});
+        }
+        res.status(200).json(orders);
+    }catch{
+        res.status(500).send({message: 'Error fetching orders'});
+    }
+}
+
+exports.updateOrderFromkitchen = async (req,res)=> {
+    try {
+        const orders = await Order.find().where('customer').equals(req.params.id);
+        if(!orders){
+            res.status(200).send({message: 'No orders placed by this customer till date'});
+        }
+        res.status(200).json({orders,message: 'Orders of the given customer'});
+    }catch{
+        res.status(500).send({message: 'Error fetching orders for given customer'});
     }
 }
 
@@ -87,7 +166,7 @@ exports.getPendingOrdersByTable = async(req,res)=>{
     try{
         const orders = await Order.find({
             tableNo : req.params.tableno,
-            status : 'pending'
+            status : 'Order Received'
         });
         if(!orders){
             req.status(200).send({message: 'No Pending orders for given table number'});
@@ -101,14 +180,3 @@ exports.getPendingOrdersByTable = async(req,res)=>{
 exports.NotValidRoute = async(req,res) => {
     res.status(400).json({ message: "Enter Valid Route" });
 }
-// exports.getPendingOrdersByTable = async(req,res)=>{
-//     try{
-//         const orders = await Order.find().where('status').equals('pending');
-//         if(!orders){
-//             res.status(200).send({message: 'No pending orders'});
-//         }
-//         res.status(200).json({orders,message: 'Pending orders'});
-//     }catch{
-//         res.status(500).send({message: 'Error fetching orders'});
-//     }
-// }

@@ -190,7 +190,7 @@ function DisplayMenu() {
       <MenuItemList
         categories={categories}
         foodItems={filteredFoodItems}
-        categoryRefs={categoryRefs}
+        categoryRefs={categoryRefs} 
         searchTerm={searchTerm}
         cartItems={cartItems}
         onAddToCart={handleAddToCart}

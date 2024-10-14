@@ -25,6 +25,8 @@ exports.creatFoodItem = async(req,res) => {
     }
 }
 exports.getFoodById = async(req,res) => {
+    console.log("in menu getFoodById");
+    
     try {
         const item = await Menu.findById(req.params.id);
         if(!item){
@@ -35,6 +37,24 @@ exports.getFoodById = async(req,res) => {
         res.status(400).json({ message: error.message });
     }
 }
+
+
+// menu-controller.js
+exports.getFoodByIdOrders = async (id) => {
+    try {
+      const item = await Menu.findById(id);
+      if (!item) {
+        throw new Error('Item not found');
+      }
+      return item; // Return the item directly
+    } catch (error) {
+      throw new Error(error.message); // Handle error by throwing it
+    }
+  };
+
+
+
+
 exports.getFoodByName = async(req,res) => {
     try {
         const menuItems = await Menu.find({ foodName: { $regex: req.params.foodName, $options: 'i'} });

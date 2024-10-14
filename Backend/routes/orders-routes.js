@@ -6,7 +6,9 @@ const router = express.Router();
 router.get('/',ordersController.getOrders);
 
 //get order which are pending
-router.get('/pending',ordersController.getPendingOrders);
+router.get('/received',ordersController.getreceivedOrders);
+router.get('/accepted',ordersController.getacceptedOrders);
+
 
 //get pending orders by table number
 router.get('/pending/:tableno',ordersController.getPendingOrdersByTable);
@@ -22,6 +24,7 @@ router.post('/',ordersController.addOrders);
 
 //Update Order
 router.patch('/:id',ordersController.updateOrderById);
+
 
 //Delete Order
 router.delete('/:id',ordersController.deleteOrderById);
