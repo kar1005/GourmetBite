@@ -8,6 +8,8 @@ router.get('/',partyBookingController.getPartyBooking);
 //get party by id 
 router.get('/:id',partyBookingController.getPartyBookingByID);
 
+router.get('customer//:id',partyBookingController.getPartyBookingByCustomerID);
+
 //add party
 router.post('/',partyBookingController.addPartyBooking);
 
@@ -15,7 +17,7 @@ router.post('/',partyBookingController.addPartyBooking);
 router.patch('/:id',partyBookingController.updatePartyBookingById);
 
 //delete party
-router.post('/:id',partyBookingController.deletePartyBookingById);
+router.delete('/:id',partyBookingController.deletePartyBookingById);
 
 router.use('/',partyBookingController.NotValidRoute);
 

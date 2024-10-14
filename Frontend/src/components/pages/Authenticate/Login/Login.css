@@ -1,16 +1,13 @@
-.signup-container{
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    height: 105vh;
-    
+.login-container{
+    padding-top: 50px;
+    padding-bottom: 90px;
 }
-.addUser h3{
+.addUserlogin h3{
     text-align: center;
      font-weight: bold;
 }
-.addUser{
-    width:100%;
+.addUserlogin{
+    width:30%;
     margin: 50px auto;
     background-color: var(--white);
     padding: 40px;
@@ -19,7 +16,7 @@
 }
 
 .addUSerForm .inputGroup{
-    width: 50%;
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -37,6 +34,10 @@
     margin-top: 25px;
 }
 
+.inputGroup button:hover{
+    color: #000;
+}
+
 .signup{
     margin-top: 25px;
     text-align: center;
@@ -44,4 +45,5 @@
 
 .login .btn .btn-primary{
     width: 50%;
+
 }

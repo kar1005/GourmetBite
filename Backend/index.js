@@ -10,6 +10,7 @@ app.use(bodyParser.json());
 
 // Serve static files from the uploads directory
 app.use('/uploads', express.static('uploads'));
+app.use('/profilepic', express.static('profilepic'));
 
 const PORT = 5000
 const Database_url = 'mongodb+srv://gourmetdevelopers:itsATprojectkk@cluster0.ksb38.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'

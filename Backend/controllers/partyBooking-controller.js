@@ -2,7 +2,7 @@ const PartyBooking = require('../models/partyBooking');
 
 exports.getPartyBooking = async (req,res)=>{
     try{
-        const booking = await PartyBooking.find();
+        const booking = await PartyBooking.find().populate('customer');
         res.status(200).json(booking);
     }catch{
         res.status(500).send({message: 'Error fetching PartyBooking'});
@@ -12,6 +12,17 @@ exports.getPartyBooking = async (req,res)=>{
 exports.getPartyBookingByID = async (req,res)=>{
     try{
         const  booking = PartyBooking.findById(req.params.id);
+        if(!booking){
+            res.status(404).send({message:'PartyBooking not found'});
+        }
+    }catch{
+        res.status(500).send({mesaage:'Error fetching PartyBooking'});
+    }
+}
+
+exports.getPartyBookingByCustomerID = async (req,res)=>{
+    try{
+        const  booking = PartyBooking.find().where('customer').equals(req.params.id);
         if(!booking){
             res.status(404).send({message:'PartyBooking not found'});
         }

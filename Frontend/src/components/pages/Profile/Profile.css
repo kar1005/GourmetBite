@@ -1,0 +1,62 @@
+.profile-page{
+    padding-top: 100px;
+}
+
+.profile-sidebar .profile-section{
+    margin-left: 30px;
+}
+
+/* Sidebar container */
+.profile-sidebar {
+    height: 100%;
+    width: 230px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    display: flex;
+    flex-direction: column; /* Keep elements in a vertical line */
+    align-items: flex-start;
+    padding-top: 150px;
+     /* Aligns items to start of the column */
+}
+
+/* Profile section */
+.profile-section {
+    text-align: center;
+    color: var(--white);
+}
+
+/* Sidebar links */
+ul {
+    margin-top: 20px;
+    width: 100%; /* Adjust margin to create space between profile and links */
+}
+
+.profile-sidebar li {
+    padding: 15px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+
+.profile-sidebar li:hover {
+    background-color: #575757;
+    color: #f1f1f1; 
+}
+
+.profile-page .content{
+    margin-left: 300px;
+}
+
+.profile-page .content .thead-dark{
+    background-color: var(--black);
+    color: var(--white);
+}
+
+.update-container{
+    align-items: center;
+    width: 75%;
+}
