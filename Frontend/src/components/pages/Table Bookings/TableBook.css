@@ -1,0 +1,42 @@
+.bookings {
+    padding-top: 100px;
+}
+
+.bookings .buttons{
+    padding-left: 550px;
+    border-color: black;
+}
+
+.addTableBook h3{
+    text-align: center;
+     font-weight: bold;
+}
+.addTableBook{
+    width:60%;
+    margin: 50px auto;
+    background-color: var(--white);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 8px rgba(0,0,0);
+    box-sizing: content-box;
+    height: fit-content;
+}
+
+.bookTableForm .inputGroup{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.bookTableForm .inputGroup label{
+    margin-top: 10px;
+}
+
+.bookTableForm .inputGroup input{
+    margin-top: 8px;
+    padding: 10px;
+}
+
+.inputGroup button{
+    margin-top: 25px;
+}

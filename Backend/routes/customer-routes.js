@@ -11,6 +11,9 @@ router.get('/:id', customerController.getCustomerById);
 // Create a new customer
 router.post('/', customerController.createCustomer);
 
+//login user
+router.post('/login', customerController.loginCustomer);
+
 // Update a customer by ID
 router.patch('/:id',customerController.updateCustomer);
 

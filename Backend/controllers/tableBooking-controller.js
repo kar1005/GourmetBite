@@ -20,15 +20,39 @@ exports.getTableBookingByID = async (req,res)=>{
     }
 }
 
-exports.addTableBooking = async(req,res)=>{
+exports.getTableBookingByCustomerID = async (req,res)=>{
     try{
-        const booking = new TableBooking(req.body);
-        await booking.save();
-        res.status(200).json({message:'TableBooking added sucessfully'});
-    }catch(error){
-        res.status(400).json({mesaage:error.mesaage});
+        const  booking = TableBooking.find().where('customer').equals(req.params.id);
+        if(!booking){
+            res.status(404).send({message:'TableBooking not found'});
+        }
+    }catch{
+        res.status(500).send({mesaage:'Error fetching TableBooking'});
     }
 }
+
+exports.addTableBooking = async (req, res) => {
+    try {
+        const { date, noOfPerson } = req.body; // Extract date and number of people from request
+
+        const existingBookings = await TableBooking.find({ date });
+        const totalPersons = existingBookings.reduce((total, booking) => total + booking.noOfPerson, 0);
+
+        const maxCapacity = 50; 
+        if (totalPersons + noOfPerson > maxCapacity) {
+            return res.status(400).json({ message: 'Cannot book. Max capacity exceeded for the given date.' });
+        }
+
+        // Step 4: Save the new booking
+        const booking = new TableBooking(req.body);
+        await booking.save();
+
+        res.status(200).json({ message: 'TableBooking added successfully' });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
 
 exports.updateTableBookingById = async(req,res)=>{
     try{

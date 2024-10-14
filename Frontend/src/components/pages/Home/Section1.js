@@ -15,7 +15,7 @@ function Section1() {
                         <h3 className="pt-2 pb-4">
                             Get the best Dine-in experience with our Restaurant.
                         </h3>
-                        <Link to="/" className="order_now">
+                        <Link to="/cart" className="order_now">
                             Order Now
                         </Link>
                     </div>

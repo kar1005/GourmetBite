@@ -1,16 +1,14 @@
-.signup-container{
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    height: 105vh;
-    
+.contact-container{
+    padding-top: 50px;
+    padding-bottom: 90px;
 }
-.addUser h3{
+.contactus h3{
     text-align: center;
      font-weight: bold;
 }
-.addUser{
-    width:25%;
+
+.contactus{
+    width:50%;
     margin: 50px auto;
     background-color: var(--white);
     padding: 40px;
@@ -37,13 +35,9 @@
     margin-top: 25px;
 }
 
-.inputGroup button:hover{
-    color: #000;
-}
 
-.signup{
+.contact-container{
     margin-top: 25px;
-    text-align: center;
 }
 
 .login .btn .btn-primary{

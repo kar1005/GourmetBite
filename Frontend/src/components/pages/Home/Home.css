@@ -35,6 +35,36 @@
     padding-top: 30px;
 }
 
+
+/*Home About 2.0*/
+.about_section{
+    padding-top: 80px;
+    padding-bottom: 100px;
+    width: 100%;
+}
+
+.about_section h2{
+    font-size: 3.5rem;
+}
+
+.about_section p{
+    color: var(--grey);
+    padding: 20px 30px;
+    font-size: 19px;
+}
+
+.about_wrapper{
+    background-color: var(--golden);
+    padding-top: 70px;
+    padding-bottom: 30px;
+}
+
+.about_wrapper img{
+    mix-blend-mode: color-burn;
+}
+
+
+
 /*Media Query Mobiles*/
 @media(max-width:767px){
     .hero_section .hero_text h1{
