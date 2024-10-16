@@ -6,6 +6,7 @@ import Orders from './Orders';
 import Bookings from './Bookings';
 import UpdateProfile from './UpdateProfile';
 import { UserCircle, ShoppingBag, CalendarDays, Settings, LogOut } from 'lucide-react';
+import PartyBooking from './PartyBooking';
 
 const ProfileLayout = () => {
   const [selectedOption, setSelectedOption] = useState('orders');
@@ -80,6 +81,13 @@ const ProfileLayout = () => {
                   <CalendarDays size={18} className="me-2" /> Table Bookings
                 </Nav.Link>
                 <Nav.Link
+                  active={selectedOption === 'partyBooking'}
+                  onClick={() => setSelectedOption('partyBooking')}
+                  className="d-flex align-items-center"
+                >
+                  <CalendarDays size={18} className="me-2" /> Party Bookings
+                </Nav.Link>
+                <Nav.Link
                   active={selectedOption === 'updateProfile'}
                   onClick={() => setSelectedOption('updateProfile')}
                   className="d-flex align-items-center"
@@ -103,6 +111,7 @@ const ProfileLayout = () => {
               {selectedOption === 'orders' && <Orders />}
               {selectedOption === 'bookings' && <Bookings />}
               {selectedOption === 'updateProfile' && <UpdateProfile />}
+              {selectedOption === 'partyBooking' && <PartyBooking />}
             </Card.Body>
           </Card>
         </Col>

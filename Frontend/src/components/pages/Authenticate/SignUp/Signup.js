@@ -59,7 +59,7 @@ function Signup() {
   return (
     <>
     <div className="signup-container">
-        <div className="addUser">
+        <div className="addUsersignup">
             <h3>SignUp</h3>
             <form onSubmit={onSubmitHandler} className="addUSerForm" encType='multipart/form-data' method='POST'>
                 <div className="inputGroup">

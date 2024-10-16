@@ -2,7 +2,7 @@ const TableBooking = require('../models/tableBooking');
 
 exports.getTableBooking = async (req,res)=>{
     try{
-        const booking = await TableBooking.find();
+        const booking = await TableBooking.find().populate('customer');
         res.status(200).json(booking);
     }catch{
         res.status(500).send({message: 'Error fetching TableBooking'});

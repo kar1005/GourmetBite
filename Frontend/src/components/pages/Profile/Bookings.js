@@ -14,12 +14,6 @@ function Bookings() {
         }
     }, []);
 
-    useEffect(() => {
-        if (customer._id) {
-            fetchOrders(customer._id); // Fetch orders only when customer._id is set
-        }
-    }, []);
-
     const fetchCustomerData = async (phoneNumber) => {
         try {
             const response = await fetch(`http://localhost:5000/customers/phone/${phoneNumber}`, {
@@ -28,7 +22,9 @@ function Bookings() {
             });
             const data = await response.json();
             if (response.ok) {
+                console.log(data);
                 setCustomer(data[0]);
+                fetchOrders(customer._id);
             } else {
                 console.error('Failed to fetch customer:', response.status);
             }
@@ -58,6 +54,7 @@ function Bookings() {
                         <th scope="col">Book Id</th>
                         <th scope="col">Number Of Persons</th>
                         <th scope="col">Date</th>
+                        <th scope="col">Time</th>
                     </tr>   
                 </thead>
                 <tbody>
@@ -67,6 +64,7 @@ function Bookings() {
                             <td>{c._id}</td>
                             <td>{c.noOfPerson}</td>
                             <td>{c.date}</td>
+                            <th>{c.time}</th>
                         </tr>
                     ))}
                 </tbody>
