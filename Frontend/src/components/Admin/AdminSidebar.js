@@ -7,6 +7,9 @@ import AddCustomer from './customer/AddCustomer';
 import UpdateCustomer from './customer/UpdateCustomer';
 import BookingRequests from './PartyBookings/BookingRequests';
 import AddItemForm from './addItem/addItem';
+import Dashboard from './Dashborad';
+import TableBooking from './TableBookings/TableBookings';
+import ContactUs from './ContactUs/ContactUs';
 
 function AdminSidebar(props) {
 
@@ -27,7 +30,8 @@ function AdminSidebar(props) {
                     <li onClick={() => handleOptionClick('customers')}>Customers</li>
                     <li onClick={() => handleOptionClick('partyRequests')}>Party Booking Requests</li>
                     <li onClick={() => handleOptionClick('addItem')}>Add Item</li>
-
+                    <li onClick={() => handleOptionClick('tableBooking')}>Table Bookings</li>
+                    <li onClick={() => handleOptionClick('contactus')}>Contact Us Responses</li>
                 </ul>
             </div>
 
@@ -35,13 +39,15 @@ function AdminSidebar(props) {
             <div className="content">
             <Row>
               <>
-                {selectedOption === 'dashboard' && <Dashborad handleClick={handleOptionClick} />}
+                {selectedOption === 'dashboard' && <Dashboard handleClick={handleOptionClick} />}
                 {selectedOption === 'menus' && <DisplayUpdateMenu />}
                 {selectedOption === 'customers' && <Customers handleClick={handleOptionClick} />}
                 {selectedOption === 'createcustomer' && <AddCustomer />}
                 {selectedOption === 'updatecustomer' && <UpdateCustomer customerId={selectedCustomerId} />}
                 {selectedOption === 'partyRequests' && <BookingRequests />}
                 {selectedOption === 'addItem' && <AddItemForm/>}
+                {selectedOption === 'tableBooking' && <TableBooking/>}
+                {selectedOption === 'contactus' && <ContactUs/>}
               </>
             </Row>
             </div>

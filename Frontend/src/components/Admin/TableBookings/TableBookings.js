@@ -43,7 +43,7 @@ function TableBookings() {
 
     return (
         <>
-            <h2>Conatct Us Responses</h2>
+            <h2>Table bookings</h2>
             <table className="table">
                 <thead className="thead-dark">
                     <tr>
