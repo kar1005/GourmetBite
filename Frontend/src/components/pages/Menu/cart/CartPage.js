@@ -21,10 +21,15 @@ const CartPage = () => {
   
   useEffect(() => {
     const token = localStorage.getItem('token');
-    const tempTableNo = localStorage.getItem('tableNumber')
-    if(tempTableNo != "undefined"){
-      setTableNumber(tempTableNo);
+
+    const tempTableNo = localStorage.getItem('tableNumber');
+    if (tempTableNo !== null) {
+        console.log('Fetched Table Number:', tempTableNo);
+        setTableNumber(tempTableNo);
+    } else {
+        console.log('Table Number does not exist in localStorage.');
     }
+
     if (token) {
       const decodedToken = jwt_decode(token);
       setIsLoggedIn(true); 
