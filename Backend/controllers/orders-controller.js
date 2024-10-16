@@ -152,7 +152,39 @@ exports.updateOrderFromkitchen = async (req,res)=> {
 
 exports.getOrdersByCustomer = async (req,res)=> {
     try {
-        const orders = await Order.find().where('customer').equals(req.params.id);
+        const rawOrders = await Order.find().where('customer').equals(req.params.id);
+
+        let intemsObjectArray=[];
+        let orders=[];
+        let temp;
+
+       for (let i = 0; i < rawOrders.length ; i++) {
+           console.log(rawOrders);            
+        for (let j = 0; j < rawOrders[i].items.length ; j++)
+        {
+            id = rawOrders[i].items[j].itemId;
+            const item = await Menu.getFoodByIdOrders(id);
+            temp = {
+                itemName:item.foodName,
+                quantity:rawOrders[i].items[j].qty
+            }
+            intemsObjectArray.push(temp);
+        } 
+        let finalobject = {
+            id: rawOrders[i]._id,
+            status:rawOrders[i].status,
+            tableNo :rawOrders[i].tableNo,
+            items : intemsObjectArray,
+            notes:rawOrders[i].notes,
+            time:rawOrders[i].time,
+            amount:rawOrders[i].amount
+        };
+        orders.push(finalobject);
+        intemsObjectArray=[];
+        finalobject=[];
+       }
+
+
         if(!orders){
             res.status(200).send({message: 'No orders placed by this customer till date'});
         }

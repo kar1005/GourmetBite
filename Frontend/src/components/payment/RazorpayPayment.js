@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { Button, Card, Container } from 'react-bootstrap';
 
 const RazorpayPayment = () => {
   const [order, setOrder] = useState(null);
+  const [amount, setAmount] = useState(1);
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -11,6 +14,9 @@ const RazorpayPayment = () => {
     // Access order data passed from the previous page
     if (location.state && location.state.order) {
       setOrder(location.state.order);
+      console.log("in Razorpay: ",order);
+      
+      setAmount(location.state.amount);
     } else {
       alert('Order data is missing!');
       navigate('/'); // Navigate to another page if order data is missing
@@ -129,11 +135,24 @@ const RazorpayPayment = () => {
   };
 
   return (
-    <div>
-      <h1>Make a Payment</h1>
-      <button onClick={handlePayment} disabled={!order}>Pay Now</button>
-    </div>
+    <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
+      <Card style={{ width: '25rem', boxShadow: '0 0 10px rgba(0,0,0,0.1)' }}>
+        <Card.Body>
+          <Card.Title className="text-center">Make a Payment</Card.Title>
+          <Card.Text className="text-center mb-4">
+            <strong>Your Total Bill is:</strong> ₹{amount}
+          </Card.Text>
+          <div className="d-grid">
+          <Button variant="success" onClick={handlePayment} disabled={!order}>
+              Pay Now
+            </Button>
+
+          </div>
+        </Card.Body>
+      </Card>
+    </Container>
   );
+
 };
 
 export default RazorpayPayment;
