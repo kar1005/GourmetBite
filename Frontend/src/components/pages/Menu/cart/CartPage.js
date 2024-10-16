@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import {jwtDecode as jwt_decode} from 'jwt-decode';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
-import RazorpayPayment from '../../../payment/RazorpayPayment';
+// import RazorpayPayment from '../../../payment/RazorpayPayment';
 const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);
   const [subtotal, setSubtotal] = useState(0);
@@ -16,8 +18,50 @@ const CartPage = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
+  
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const tempTableNo = localStorage.getItem('tableNumber')
+    if(tempTableNo != "undefined"){
+      setTableNumber(tempTableNo);
+    }
+    if (token) {
+      const decodedToken = jwt_decode(token);
+      setIsLoggedIn(true); 
+      fetchCustomerData(decodedToken.phone_no);
+    }else{
+      setIsLoggedIn(false);
+    }
+  }, []);
+
+
+  const fetchCustomerData = async (phoneNumber) => {
+    try {
+      const response = await fetch(`http://localhost:5000/customers/phone/${phoneNumber}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      });
+      const data = await response.json();
+      console.log('Fetched customer data:', data); // Log response
+
+      if (response.ok) {
+        setUserInfo(data[0]);
+        console.log(userInfo);// Set customer state with fetched data
+      } else {
+        console.error('Failed to fetch customer:', response.status);
+      }
+    } catch (err) {
+      console.error('Error:', err);
+    }
+  };  
+
+
+
+
 
   useEffect(() => {
+
+
     const items = location.state?.cartItems || JSON.parse(localStorage.getItem('cartItems')) || {};
     const itemsArray = Object.entries(items).map(([id, quantity]) => {
       const item = JSON.parse(localStorage.getItem(`foodItem_${id}`));
@@ -64,8 +108,7 @@ const CartPage = () => {
   };
 
   const handleLogin = () => {
-    setIsLoggedIn(true);
-    setUserInfo({ name: 'John Doe', phone: '123-456-7890' });
+    navigate('/login');
   };
 
 
@@ -78,7 +121,7 @@ const CartPage = () => {
     console.log("Creating order");
     
     const orderData = {
-        customer: '66e088db398f488807011453', // Replace with actual customer ID
+        customer: userInfo._id, // Replace with actual customer ID
         items: cartItems.map(item => ({ itemId: item._id, qty: item.quantity })),
         notes: savedNotes,
         status: "Payment Pending",
@@ -103,7 +146,7 @@ const CartPage = () => {
 
         const data = await response.json();
         console.log('Order created successfully:', data);
-        navigate('/razorpay', { state: { order: data.order } });
+        navigate('/razorpay', { state: { order: data.order  ,amount:data.order.amount}});
         // Navigate to the order confirmation page or show a success message
     } catch (error) {
         console.error('Error creating order:', error);
@@ -158,7 +201,7 @@ const CartPage = () => {
       {cartItems.length === 0 ? (
         <div className="text-center">
           <p className="lead">Your cart is empty</p>
-          <button className="btn btn-primary" onClick={() => navigate('/menu')}>Continue Shopping</button>
+          <button className="btn btn-primary" onClick={() => navigate('/menu')}>Go To Menu</button>
         </div>
       ) : (
         <div className="row">
@@ -271,7 +314,7 @@ const CartPage = () => {
                   <div className="mb-3">
                     <h6>Order for:</h6>
                     <p className="mb-0">{userInfo.name}</p>
-                    <p className="mb-0">{userInfo.phone}</p>
+                    <p className="mb-0">{userInfo.phone_no}</p>
                   </div>
                 ) : (
                   <button className="btn btn-secondary w-100 mb-3" onClick={handleLogin}>Login to Checkout</button>

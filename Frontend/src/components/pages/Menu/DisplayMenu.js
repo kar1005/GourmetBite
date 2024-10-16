@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import MenuItemList from './MenuItemList';
 import CategoriesSidebar from '../../shared/SharedMenu/categoriesSideBar';
 import SearchBar from '../../shared/SharedMenu/searchBar';
+import { useParams, useHistory } from 'react-router-dom';
 
 function DisplayMenu() {
   const [categories, setCategories] = useState([]);
@@ -19,10 +20,16 @@ function DisplayMenu() {
   const categoryRefs = useRef({});
   const navigate = useNavigate();
   const location = useLocation();
-
+  const { tableNumber } = useParams();  
   useEffect(() => {
+    
     const fetchCategories = async () => {
       try {
+      const tempTableNo = localStorage.getItem('tableNumber')
+      if(tempTableNo === "undefined"){
+        // setTableNumber(tempTableNo);
+        localStorage.setItem('tableNumber', tableNumber);
+      }
         const responseCategory = await fetch('http://localhost:5000/menu/categories/list');
         const responseMenu = await fetch('http://localhost:5000/menu/');
         if (!responseCategory.ok || !responseMenu.ok) {
@@ -35,6 +42,8 @@ function DisplayMenu() {
         setFilteredFoodItems(dataMenu);
 
         setActiveCategory(dataCategory[0]);
+
+        
       } catch (err) {
         setError(err.message);
       } finally {
@@ -57,6 +66,10 @@ function DisplayMenu() {
       }
     }
   }, [location]);
+
+ 
+
+
 
   useEffect(() => {
     // Save cart items to local storage whenever cartItems changes
@@ -96,7 +109,7 @@ function DisplayMenu() {
   };
 
   const handleCartNavigation = () => {
-    navigate('/cart', { state: { cartItems } });
+    navigate('/cart', { state: { cartItems } , tableNumber:tableNumber });
   };
 
   if (loading) return <div>Loading categories...</div>;
@@ -149,9 +162,9 @@ function DisplayMenu() {
       <br />
       <br />
       <br />
+      {/* <br />
       <br />
-      <br />
-      <br />
+      <br /> */}
       <div className="container-fluid">
         <div className="row">
           {/* Categories sidebar */}
@@ -202,12 +215,12 @@ function DisplayMenu() {
           </main>
         </div>
       </div>
+      {/* <br />
       <br />
       <br />
       <br />
       <br />
-      <br />
-      <br />
+      <br /> */}
     </>
   );
 }

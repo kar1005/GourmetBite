@@ -71,7 +71,7 @@ function PartyBookMainForm() {
             });
     
             if (response.ok) {
-                alert('Your party booking request is sent successfully');
+                alert('Your party booking request is sent successfully.\n Our manager will contact you for the same very soon');
                 navigate("/");
             } else {
                 const errorMsg = await response.json(); // Get server error message
