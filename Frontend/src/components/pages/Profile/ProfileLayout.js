@@ -52,6 +52,7 @@ function ProfileLayout() {
   const Logout = ()=>{
     localStorage.removeItem('token');
     navigate('../');
+    // console.log("Logout called");
   }
 
   return (
@@ -66,7 +67,7 @@ function ProfileLayout() {
           <li onClick={() => handleOptionClick('orders')}>Orders</li>
           <li onClick={() => handleOptionClick('bookings')}>Table Bookings</li>
           <li onClick={() => handleOptionClick('updateProfile')}>Update Profile</li>
-          <li onClick={Logout()}>Logout</li>
+          <li onClick={Logout}>Logout</li>
         </ul>
       </div>
 

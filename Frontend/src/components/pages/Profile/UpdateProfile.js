@@ -48,14 +48,15 @@ function UpdateProfile() {
     const { name, value, type, checked, files } = e.target;
     setCustomer((prevData) => ({
       ...prevData,
-      [name]: type === "checkbox" ? checked : name === "image" ? files[0] : value,
+      [name]: type === "checkbox" ? checked : type === "file" ? files[0] : value, // Update this condition
     }));
   };
+  
 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData(); // Create FormData here
+    const formData = new FormData();
     formData.append('name', customer.name);
     formData.append('phone_no', customer.phone_no);
     formData.append('dob', customer.dob);
@@ -64,22 +65,25 @@ function UpdateProfile() {
       formData.append('profile_pic', customer.profile_pic);
     }
     formData.append('password', customer.password);
-    
+  
     try {
-        const response = await fetch(`http://localhost:5000/customers/${customer._id}`, {
-            method: 'PATCH',
-            body: formData,
-        });
-        if (response.ok) {
-            alert('Profile updated successfully');
-            navigate('../profile');
-        } else {
-            console.error('Failed to update profile:', response.status);
-        }
+      const response = await fetch(`http://localhost:5000/customers/${customer._id}`, {
+        method: 'PATCH',
+        body: formData,
+      });
+  
+      if (response.ok) {
+        alert('Profile updated successfully');
+        navigate('../profile');
+      } else {
+        const errorData = await response.json(); // Log error response
+        console.error('Failed to update profile:', errorData);
+      }
     } catch (err) {
-        console.error('Error updating profile:', err);
+      console.error('Error updating profile:', err);
     }
-};
+  };
+  
   
 
   return (

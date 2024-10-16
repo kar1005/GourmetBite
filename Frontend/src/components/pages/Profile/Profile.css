@@ -17,8 +17,12 @@
     display: flex;
     flex-direction: column; /* Keep elements in a vertical line */
     align-items: flex-start;
-    padding-top: 150px;
+    padding-top: 100px;
      /* Aligns items to start of the column */
+}
+
+.profile-name{
+    color: var(--white);
 }
 
 /* Profile section */
