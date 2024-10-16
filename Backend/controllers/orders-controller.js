@@ -14,7 +14,7 @@ exports.addOrders = async (req, res) => {
 
 exports.getOrders = async (req,res)=>{
     try{
-        const orders = await Order.find();
+        const orders = await Order.find().populate('customer');
         res.status(200).json(orders);
     }catch{
         res.status(500).send({message: 'Error fetching orders'});

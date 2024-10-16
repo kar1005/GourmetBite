@@ -1,10 +1,16 @@
+.tablebook-container{
+    background-size: cover;
+    background-position: center;
+    display: flex;
+}
+
 .bookings {
     padding-top: 100px;
+    padding-bottom: 90px;
 }
 
 .bookings .buttons{
-    padding-left: 550px;
-    border-color: black;
+    margin-left: 550px;
 }
 
 .addTableBook h3{
@@ -15,11 +21,9 @@
     width:60%;
     margin: 50px auto;
     background-color: var(--white);
-    padding: 20px;
+    padding: 40px;
     border-radius: 10px;
     box-shadow: 1px 1px 8px rgba(0,0,0);
-    box-sizing: content-box;
-    height: fit-content;
 }
 
 .bookTableForm .inputGroup{
@@ -39,4 +43,12 @@
 
 .inputGroup button{
     margin-top: 25px;
+}
+
+
+.tablebook-container{
+    margin-top: 25px;
+}
+.btn .btn-primary{
+    width: 50%;
 }

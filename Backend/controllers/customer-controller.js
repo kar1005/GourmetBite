@@ -99,40 +99,36 @@ exports.loginCustomer = async (req, res) => {
 
 // Update a customer
 exports.updateCustomer = async (req, res) => {
-    upload(req,res,async(err)=>{
-        if(err){
-            return res.status(400).json({ message: 'File upload failed', error: err });
+    try {
+        const customerId = req.params.id;
+        const customer = await Customer.findById(customerId);
+        
+        if (!customer) {
+            return res.status(404).json({ error: 'Customer not found' });
         }
-        try {
-            const data = JSON.parse(req.body.data); 
-            const imagePath = req.file ? req.file.path : null;
-    
-                let { name, phone_no, password, dob, gender } = req.body;
-    
-                password = await bcrypt.hash(req.body.password,10);
-    
-                const updateCustomer = new Customer({
-                    name,
-                    phone_no,
-                    password,
-                    dob,
-                    gender,
-                    profile_pic: req.file ? req.file.path : null,
-                });
-    
-                const updatedCustomer = await Customer.findByIdAndUpdate(req.params.id,updateCustomer,{
-                    new: true,
-                    runValidators: true,
-                })
-    
-            if (!updatedCustomer) {
-                return res.status(404).json({ message: 'Customer not found' });
-            }  
-            res.status(200).json({ message: 'Customer updated successfully', customer: updatedCustomer });
-        } catch (error) {
-            res.status(400).json({ message: error.message });
+
+        // Check if a new profile picture is uploaded
+        if (req.file) {
+            const newProfilePic = req.file.filename;
+            // Update the profile_pic field with the new file name
+            customer.profile_pic = newProfilePic;
         }
-    })
+
+        // Update other customer fields from the request body
+        customer.name = req.body.name || customer.name;
+        customer.phone_no = req.body.phone_no || customer.phone_no;
+        customer.dob = req.body.dob || customer.dob;
+        customer.gender = req.body.gender || customer.gender;
+        customer.password = req.body.password || customer.password;
+
+        // Save the updated customer
+        await customer.save();
+
+        res.status(200).json({ message: 'Customer updated successfully', customer });
+    } catch (err) {
+        console.error('Error updating customer:', err);
+        res.status(500).json({ error: 'Failed to update customer' });
+    }
 };
 
 // Delete a customer
