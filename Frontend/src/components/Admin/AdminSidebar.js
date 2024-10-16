@@ -6,9 +6,7 @@ import './Admin.css';
 import AddCustomer from './customer/AddCustomer';
 import UpdateCustomer from './customer/UpdateCustomer';
 import BookingRequests from './PartyBookings/BookingRequests';
-import Dashborad from './Dashborad';
-import ContactUs from './ContactUs/ContactUs';
-import TableBookings from './TableBookings/TableBookings';
+import AddItemForm from './addItem/addItem';
 
 function AdminSidebar(props) {
 
@@ -28,8 +26,8 @@ function AdminSidebar(props) {
                     <li onClick={() => handleOptionClick('menus')}>Menu</li>
                     <li onClick={() => handleOptionClick('customers')}>Customers</li>
                     <li onClick={() => handleOptionClick('partyRequests')}>Party Booking Requests</li>
-                    <li onClick={() => handleOptionClick('contactus')}>Contact Us Responses</li>
-                    <li onClick={() => handleOptionClick('tableBooking')}>Table Bookings</li>
+                    <li onClick={() => handleOptionClick('addItem')}>Add Item</li>
+
                 </ul>
             </div>
 
@@ -43,8 +41,7 @@ function AdminSidebar(props) {
                 {selectedOption === 'createcustomer' && <AddCustomer />}
                 {selectedOption === 'updatecustomer' && <UpdateCustomer customerId={selectedCustomerId} />}
                 {selectedOption === 'partyRequests' && <BookingRequests />}
-                {selectedOption === 'contactus' && <ContactUs />}
-                {selectedOption === 'tableBooking' && <TableBookings />}
+                {selectedOption === 'addItem' && <AddItemForm/>}
               </>
             </Row>
             </div>

@@ -1,21 +1,19 @@
 import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const UpdateItemForm = () => {
-  const location = useLocation();
+const AddItemForm = () => {
   const navigate = useNavigate();
-  const { item: existingFoodItem } = location.state || {};
 
   const [formData, setFormData] = useState({
-    category: existingFoodItem?.category || "",
-    foodName: existingFoodItem?.foodName || "",
-    image: existingFoodItem?.image || "",
-    price: existingFoodItem?.price || "",
-    description: existingFoodItem?.description || "",
-    rating: existingFoodItem?.rating || "",
-    allergyIngredients: existingFoodItem?.allergyIngredients || "",
-    availability: existingFoodItem?.availability || true,
+    category: "",
+    foodName: "",
+    image: null,
+    price: "",
+    description: "",
+    rating: "",
+    allergyIngredients: "",
+    availability: true,
   });
 
   const [alertMessage, setAlertMessage] = useState("");
@@ -29,28 +27,6 @@ const UpdateItemForm = () => {
     }));
   };
 
-  const handleDelete = async () => {
-    console.log("Deleting",existingFoodItem._id);
-    try{      
-      const response = await fetch(`http://localhost:5000/menu/${existingFoodItem._id}`, {
-      method: 'DELETE',
-    });
-    if (!response.ok) {
-    //   const errorResponse = await response.json();
-    //   throw new Error(errorResponse.message || 'Failed to update item');
-    // }
-    setAlertMessage("Item Deleted successfully!");
-    setAlertType("success");
-    setTimeout(() => navigate("/admin/panel"), 2000);
-    }
-  } catch (error) {
-    setAlertMessage("Failed to Delete item. Please try again.");
-    setAlertType("danger");
-    console.error("Error updating item:", error);
-  }
-    
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -58,30 +34,36 @@ const UpdateItemForm = () => {
       if (formData.image) {
         formDataToSend.append("image", formData.image);
       }
-      formDataToSend.append("data", JSON.stringify({
-        category: formData.category,
-        foodName: formData.foodName,
-        price: formData.price,
-        description: formData.description,
-        rating: formData.rating,
-        allergyIngredients: formData.allergyIngredients,
-        availability: formData.availability,
-      }));
-      const response = await fetch(`http://localhost:5000/menu/${existingFoodItem._id}`, {
-        method: 'PATCH',
+      formDataToSend.append(
+        "data",
+        JSON.stringify({
+          category: formData.category,
+          foodName: formData.foodName,
+          price: formData.price,
+          description: formData.description,
+          rating: formData.rating,
+          allergyIngredients: formData.allergyIngredients,
+          availability: formData.availability,
+        })
+      );
+
+      const response = await fetch(`http://localhost:5000/menu`, {
+        method: "POST",
         body: formDataToSend,
       });
+
       if (!response.ok) {
         const errorResponse = await response.json();
-        throw new Error(errorResponse.message || 'Failed to update item');
+        throw new Error(errorResponse.message || "Failed to add new item");
       }
-      setAlertMessage("Item updated successfully!");
+
+      setAlertMessage("Item added successfully!");
       setAlertType("success");
-      setTimeout(() => navigate("/admin/updateMenu"), 2000);
+      setTimeout(() => navigate("/admin/panel"), 2000);
     } catch (error) {
-      setAlertMessage("Failed to update item. Please try again.");
+      setAlertMessage("Failed to add item. Please try again.");
       setAlertType("danger");
-      console.error("Error updating item:", error);
+      console.error("Error adding item:", error);
     }
   };
 
@@ -91,11 +73,17 @@ const UpdateItemForm = () => {
         <div className="col-md-8">
           <div className="card shadow">
             <div className="card-body">
-              <h2 className="card-title text-center mb-4">Update Menu Item</h2>
+              <h2 className="card-title text-center mb-4">Add New Menu Item</h2>
               {alertMessage && (
                 <div className={`alert alert-${alertType} alert-dismissible fade show`} role="alert">
                   {alertMessage}
-                  <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={() => setAlertMessage("")}></button>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"
+                    onClick={() => setAlertMessage("")}
+                  ></button>
                 </div>
               )}
               <form onSubmit={handleSubmit} encType="multipart/form-data">
@@ -202,12 +190,9 @@ const UpdateItemForm = () => {
                   </div>
                 </div>
                 <div className="d-grid gap-2 mt-4">
-                  <button type="submit" className="btn btn-success btn-lg">Update Item</button>
+                  <button type="submit" className="btn btn-primary btn-lg">Add Item</button>
                 </div>
               </form>
-              <br></br>
-              <button type="button" className="btn btn-danger btn-lg" onClick={handleDelete}>Delete Item</button>
-
             </div>
           </div>
         </div>
@@ -216,4 +201,4 @@ const UpdateItemForm = () => {
   );
 };
 
-export default UpdateItemForm;
+export default AddItemForm;

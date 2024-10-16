@@ -37,17 +37,17 @@ function App() {
           <Route path="/login" element={<Authenticate />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/admin" element={<AdminMain />} />
+          <Route path="/admin/panel" element={<AdminSidebar />} />
+          <Route path="/admin/updateItemForm" element={<UpdateItemForm />} />
 
           {/* Protected Routes */}
           {isAuthenticated ? (
             <>
               <Route path="/contactus" element={<ContactUs />} />
-              <Route path="/admin/updateMenu" element={<UpdateMenu />} />
-              <Route path="/admin/updateItemForm" element={<UpdateItemForm />} />
+              {/* <Route path="/admin/updateMenu" element={<UpdateMenu />} /> */}
               <Route path="/razorpay" element={<RazorpayPayment />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/booktable" element={<TableBook />} />
-              <Route path="/admin/panel" element={<AdminSidebar />} />
               <Route path="/myOrders" element={<MyOrders />} />
               <Route path="/kitchen/home" element={<KitchenHome />} />
             </>

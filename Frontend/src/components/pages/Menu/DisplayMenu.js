@@ -21,15 +21,17 @@ function DisplayMenu() {
   const navigate = useNavigate();
   const location = useLocation();
   const { tableNumber } = useParams();  
+
+  if (!localStorage.getItem('tableNumber') || localStorage.getItem('tableNumber') === 'undefined') {
+    console.log("TableNumber Set is:",tableNumber);
+    localStorage.setItem('tableNumber', tableNumber);
+  }
+
+
+
   useEffect(() => {
-    
     const fetchCategories = async () => {
       try {
-      const tempTableNo = localStorage.getItem('tableNumber')
-      if(tempTableNo === "undefined"){
-        // setTableNumber(tempTableNo);
-        localStorage.setItem('tableNumber', tableNumber);
-      }
         const responseCategory = await fetch('http://localhost:5000/menu/categories/list');
         const responseMenu = await fetch('http://localhost:5000/menu/');
         if (!responseCategory.ok || !responseMenu.ok) {
