@@ -29,29 +29,19 @@ exports.getCustomerById = async (req, res) => {
 };
 
 
-const storage = multer.diskStorage({
-    destination: './profilepic/', // Define where to store the uploaded images
-    filename: function (req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-    }
-});
-
-const upload = multer({
-    storage: storage
-}).single('profilepic');
-
 // Create a new customer
 exports.createCustomer = async (req, res) => {
-    // First, handle the file upload with multer
-    upload(req, res, async (err) => {
-        if (err) {
-            return res.status(400).json({ message: 'File upload failed', error: err });
-        }
-        
+    // const customer = await Customer.find().where('phone_no').equals(req.body.phone_no);
         try {
             // Access form data
             let { name, phone_no, password, dob, gender } = req.body;
-
+            // if(customer){            
+            //     return res.status(404).json({message:'Phone number already registered'});
+            // }
+            const existingCustomer = await Customer.findOne({ phone_no });
+            if (existingCustomer) {
+                return res.status(409).json({ message: 'Phone number already registered' });
+            }
             password = await bcrypt.hash(req.body.password,10);
 
             // Create new customer with the profile_pic path
@@ -72,8 +62,7 @@ exports.createCustomer = async (req, res) => {
         } catch (error) {
             res.status(400).json({ message: error.message });
         }
-    });
-};
+    };
 
 exports.loginCustomer = async (req, res) => {
     const customer = await Customer.findOne({ phone_no: req.body.phone_no });
@@ -100,31 +89,38 @@ exports.loginCustomer = async (req, res) => {
 // Update a customer
 exports.updateCustomer = async (req, res) => {
     try {
-        const customerId = req.params.id;
-        const customer = await Customer.findById(customerId);
+        // const customerId = req.params.id;
         
-        if (!customer) {
-            return res.status(404).json({ error: 'Customer not found' });
+        console.log('Received body:', req.body.data);
+        console.log('Received file:', req.file);
+        const data = JSON.parse(req.body.data); // Parse the JSON data
+        const imagePath = req.file ? req.file.path : null;
+        const isMatch = await bcrypt.compare(data.currentPassword, data.ogPass);
+        if(!isMatch){
+            res.status(400).json({ message:'The current password did not match'});
+        }
+        pass = data.ogPass;
+        if(data.newPassword){
+            pass = await bcrypt.hash(data.newPassword,10);
+        }
+        const updateCustomer ={
+            name:data.name,
+            phone_no:data.phone_no,
+            password:pass,
+            dob:data.dob,
+            gender:data.gender,
+            profile_pic:imagePath
         }
 
-        // Check if a new profile picture is uploaded
-        if (req.file) {
-            const newProfilePic = req.file.filename;
-            // Update the profile_pic field with the new file name
-            customer.profile_pic = newProfilePic;
-        }
+        const updatedCustomer = await Customer.findByIdAndUpdate(req.params.id, updateCustomer, {
+            new: true,
+            runValidators: true,
+        });
 
-        // Update other customer fields from the request body
-        customer.name = req.body.name || customer.name;
-        customer.phone_no = req.body.phone_no || customer.phone_no;
-        customer.dob = req.body.dob || customer.dob;
-        customer.gender = req.body.gender || customer.gender;
-        customer.password = req.body.password || customer.password;
+        res.status(200).json({ message: 'Customer updated successfully' , updatedCustomer});//customer
 
-        // Save the updated customer
-        await customer.save();
 
-        res.status(200).json({ message: 'Customer updated successfully', customer });
+
     } catch (err) {
         console.error('Error updating customer:', err);
         res.status(500).json({ error: 'Failed to update customer' });

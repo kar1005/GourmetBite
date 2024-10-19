@@ -1,5 +1,5 @@
 const Menu = require('../models/menu');
-const multer = require('multer');
+// const multer = require('multer');
 // const bodyParser = require('body-parser');
 
 exports.getCategories = async(req,res) =>{
@@ -16,7 +16,7 @@ exports.getCategories = async(req,res) =>{
 
 exports.creatFoodItem = async(req,res) => {
     try {
-        console.log("Here in create food:",req.body.data);
+        // console.log("Here in create food:",req.body.data);
         const data = JSON.parse(req.body.data); // Parse the JSON data
         
         const imagePath = req.file ? req.file.path : null;
