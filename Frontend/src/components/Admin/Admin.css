@@ -185,3 +185,7 @@ ul {
         grid-template-columns: 1fr;
     }
 }
+
+.deletebtn{
+    margin-left: 250px;
+}

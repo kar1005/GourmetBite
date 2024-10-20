@@ -44,7 +44,6 @@ function Customers({handleClick}) {
     return (
         <>
             <h2>Customers</h2>
-            <h3 className="text-right"><button className='order_now' onClick={()=>handleClick('createcustomer')}>Create+</button></h3>
             <table className="table">
                 <thead className="thead-dark">
                     <tr>

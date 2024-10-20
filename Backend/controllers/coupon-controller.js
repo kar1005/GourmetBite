@@ -3,7 +3,7 @@ const { findByIdAndDelete } = require('../models/orders');
 
 exports.getCoupons = async (req,res)=>{
     try{
-        const coupons = await Coupon.find();
+        const coupons = await Coupon.find().populate('validFor');
         res.status(200).json(coupons);
     }catch{
         res.status(500).send({message: 'Error fetching coupons'});
@@ -12,7 +12,7 @@ exports.getCoupons = async (req,res)=>{
 
 exports.getCouponByID = async (req,res)=>{
     try{
-        const  coupon = Coupon.findById(req.params.id);
+        const  coupon = Coupon.findById(req.params.id).populate('validFor');
         if(!coupon){
             res.status(404).send({message:'Coupon not found'});
         }

@@ -46,16 +46,21 @@ exports.updateOrderById = async(req,res)=>{
     }
 }
 
-exports.deleteOrderById = async(req,res)=>{
-    try{
-        const order = await findByIdAndDelete(req.params.id);
-        if(!order){
-            res.status(404).json({message:'Order not found'});
+exports.deleteOrderById = async (req, res) => {
+    try {
+        console.log('Received ID:', req.params.id); // Log received ID for verification
+        const order = await Order.findByIdAndDelete(req.params.id);
+        if (!order) {
+            console.log('Order not found');
+            return res.status(404).json({ message: 'Order not found' });
         }
-    }catch(error){
-        res.status(400).json({message:error.mesaage});
+        res.status(200).json({ message: 'Order deleted successfully' });
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ message: error.message }); // Fix typo from "mesaage" to "message"
     }
 }
+
 
 exports.getreceivedOrders = async (req,res)=>{
     try{
@@ -208,6 +213,84 @@ exports.getPendingOrdersByTable = async(req,res)=>{
         res.status(500).send({message: 'Error fetching orders for given table'});
     }
 }
+
+exports.getOrderByDate = async (req, res) => {
+
+    const { date } = req.params; // Get the date from route parameters
+    console.log('Received date:', date); // Debug log
+
+    if (!date) {
+        return res.status(400).send({ message: 'Date is required' });
+    }
+
+    const parsedDate = new Date(date);
+    if (isNaN(parsedDate.getTime())) {
+        return res.status(400).send({ message: 'Invalid date format' });
+    }
+
+    const startDate = new Date(parsedDate);
+    const endDate = new Date(parsedDate);
+    endDate.setDate(endDate.getDate() + 1); // Exclusive of the next day
+    
+    console.log('Searching for orders between:', startDate.toISOString(), 'and', endDate.toISOString());
+
+    try {
+        const rawOrders = await Order.find({
+            time: {
+                $gte: startDate,
+                $lt: endDate,
+            },
+            paymentStatus: { $ne: 'Payment Pending' } 
+        }).populate('customer');
+
+        let intemsObjectArray=[];
+        let orders=[];
+        let temp;
+
+       for (let i = 0; i < rawOrders.length ; i++) {
+           console.log(rawOrders);            
+        for (let j = 0; j < rawOrders[i].items.length ; j++)
+        {
+            id = rawOrders[i].items[j].itemId;
+            const item = await Menu.getFoodByIdOrders(id);
+            temp = {
+                itemName:item.foodName,
+                quantity:rawOrders[i].items[j].qty
+            }
+            intemsObjectArray.push(temp);
+        } 
+        let finalobject = {
+            id: rawOrders[i]._id,
+            status:rawOrders[i].status,
+            tableNo :rawOrders[i].tableNo,
+            items : intemsObjectArray,
+            notes:rawOrders[i].notes,
+            time:rawOrders[i].time
+        };
+        orders.push(finalobject);
+        intemsObjectArray=[];
+        finalobject=[];
+       }
+
+        if(!orders){
+            res.status(200).send({message: 'No orders'});
+        }
+
+        console.log('Orders found:', orders); // Log found orders
+
+        if (orders.length === 0) {
+            return res.status(404).json({ message: 'No orders found for this date' });
+        }
+
+        res.status(200).json(orders);
+    } catch (error) {
+        console.error('Error fetching orders:', error); // Log the error for debugging
+        res.status(500).send({ message: 'Error fetching orders for the given date' });
+    }
+};
+
+
+  
 
 exports.NotValidRoute = async(req,res) => {
     res.status(400).json({ message: "Enter Valid Route" });

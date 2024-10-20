@@ -10,6 +10,8 @@ import AddItemForm from './addItem/addItem';
 import Dashboard from './Dashborad';
 import TableBooking from './TableBookings/TableBookings';
 import ContactUs from './ContactUs/ContactUs';
+import Orders from './Orders/Orders';
+import Coupons from './Coupons/Coupons';
 
 function AdminSidebar(props) {
 
@@ -30,8 +32,11 @@ function AdminSidebar(props) {
                     <li onClick={() => handleOptionClick('customers')}>Customers</li>
                     <li onClick={() => handleOptionClick('partyRequests')}>Party Booking Requests</li>
                     <li onClick={() => handleOptionClick('addItem')}>Add Item</li>
+                    <li onClick={() => handleOptionClick('createcustomer')}>Add Customer</li>
                     <li onClick={() => handleOptionClick('tableBooking')}>Table Bookings</li>
                     <li onClick={() => handleOptionClick('contactus')}>Contact Us Responses</li>
+                    <li onClick={() => handleOptionClick('orders')}>Orders</li>
+                    <li onClick={() => handleOptionClick('coupons')}>Coupons</li>
                 </ul>
             </div>
 
@@ -48,6 +53,8 @@ function AdminSidebar(props) {
                 {selectedOption === 'addItem' && <AddItemForm/>}
                 {selectedOption === 'tableBooking' && <TableBooking/>}
                 {selectedOption === 'contactus' && <ContactUs/>}
+                {selectedOption === 'orders' && <Orders/>}
+                {selectedOption === 'coupons' && <Coupons/>}
               </>
             </Row>
             </div>

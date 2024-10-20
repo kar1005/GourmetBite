@@ -13,6 +13,8 @@ router.get('/accepted',ordersController.getacceptedOrders);
 //get pending orders by table number
 router.get('/pending/:tableno',ordersController.getPendingOrdersByTable);
 
+router.get('/date/:date',ordersController.getOrderByDate);
+
 //get orders by id
 router.get('/:id',ordersController.getOrderById);
 

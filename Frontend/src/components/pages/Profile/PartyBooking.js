@@ -58,7 +58,6 @@ function PartyBooking() {
                     </tr>   
                 </thead>
                 <tbody>
-                <tbody>
                     {orders.map((c) => (
                         <tr key={c._id}>
                             <td>{c.noOfPerson}</td>
@@ -67,7 +66,6 @@ function PartyBooking() {
                             <td>{c.demands}</td>
                         </tr>
                     ))}
-                </tbody>
                 </tbody>
             </table>
         </>

@@ -58,16 +58,14 @@ function Bookings() {
                     </tr>   
                 </thead>
                 <tbody>
-                <tbody>
                     {orders.map((c) => (
                         <tr key={c._id}>
                             <td>{c._id}</td>
                             <td>{c.noOfPerson}</td>
                             <td>{c.date}</td>
-                            <th>{c.time}</th>
+                            <td>{c.time}</td>
                         </tr>
                     ))}
-                </tbody>
                 </tbody>
             </table>
         </>

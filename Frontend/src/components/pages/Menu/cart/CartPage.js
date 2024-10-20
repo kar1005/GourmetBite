@@ -147,6 +147,8 @@ const CartPage = () => {
 
         if (!response.ok) {
             throw new Error('Failed to create order');
+        }else{
+          navigate('../profile');
         }
 
         const data = await response.json();

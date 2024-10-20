@@ -36,25 +36,36 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Authenticate />} />
           <Route path="/cart" element={<CartPage />} />
-          <Route path="/admin" element={<AdminMain />} />
-          <Route path="/admin/panel" element={<AdminSidebar />} />
-          <Route path="/admin/updateItemForm" element={<UpdateItemForm />} />
 
           {/* Protected Routes */}
           {isAuthenticated ? (
-            <>
               <Route path="/contactus" element={<ContactUs />} />
-              {/* <Route path="/admin/updateMenu" element={<UpdateMenu />} /> */}
-              <Route path="/razorpay" element={<RazorpayPayment />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/booktable" element={<TableBook />} />
-              <Route path="/myOrders" element={<MyOrders />} />
-              <Route path="/kitchen/home" element={<KitchenHome />} />
-            </>
           ) : (
-            // Redirect to the login page if not authenticated
-            <Route path="*" element={<Navigate to="/login" />} />
+            <Route path="/contactus" element={<Navigate to="/login" />} />
           )}
+          {isAuthenticated ? (
+              <Route path="/profile" element={<Profile />} />
+          ) : (
+            <Route path="/profile" element={<Navigate to="/login" />} />
+          )}
+          {isAuthenticated ? (
+              <Route path="/booktable" element={<TableBook />} />
+          ) : (
+            <Route path="/booktable" element={<Navigate to="/login" />} />
+          )}
+          {isAuthenticated ? (
+              <Route path="/myOrders" element={<MyOrders />} />
+          ) : (
+            <Route path="/myOrders" element={<Navigate to="/login" />} />
+          )}
+          {isAuthenticated ? (
+              <Route path="/kitchen/home" element={<KitchenHome />} />
+          ) : (
+            <Route path="/kitchen/home" element={<Navigate to="/login" />} />
+          )}
+              <Route path="/admin" element={<AdminMain />} />
+              <Route path="/admin/panel" element={<AdminSidebar />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>
     </AuthProvider>
@@ -62,3 +73,5 @@ function App() {
 }
 
 export default App;
+
+
