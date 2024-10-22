@@ -23,7 +23,7 @@ const CartPage = () => {
     const token = localStorage.getItem('token');
 
     const tempTableNo = localStorage.getItem('tableNumber');
-    if (tempTableNo !== null) {
+    if (tempTableNo !== null || tempTableNo !== undefined) {
         console.log('Fetched Table Number:', tempTableNo);
         setTableNumber(tempTableNo);
     } else {
@@ -255,7 +255,7 @@ const CartPage = () => {
                     type="text"
                     className="form-control"
                     id="tableNumber"
-                    value={tableNumber}
+                    value={tableNumber ? tableNumber : 5}
                     onChange={(e) => setTableNumber(e.target.value)}
                     placeholder="Enter your table number"
                     required

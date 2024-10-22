@@ -77,6 +77,7 @@ function Orders() {
                     <Card.Body>
                       <Card.Title>Status: {order.status}</Card.Title>
                       <ListGroup variant="flush">
+                      <ListGroup.Item>Date : {order.time}</ListGroup.Item>
                         <ListGroup.Item><strong>Items:</strong></ListGroup.Item>
                         {order.items.map((item, index) => (
                           <ListGroup.Item key={index}>

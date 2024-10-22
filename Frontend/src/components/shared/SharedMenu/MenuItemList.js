@@ -27,7 +27,9 @@ function MenuItemList({ categories, foodItems, categoryRefs, handleEditClick, se
       {!searchTerm ? (
         categories.map((category) => (
           <div key={category} ref={(el) => (categoryRefs.current[category] = el)}>
+            <br></br>
             <h3>{category}</h3>
+            <hr></hr>
             <Row xs={1} md={2} className="g-4">
               {foodItems
                 .filter((item) => item.category === category)

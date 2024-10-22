@@ -42,20 +42,31 @@ exports.updateFoodItem = async(req,res) => {
     try {
         const data = JSON.parse(req.body.data); // Parse the JSON data
         const imagePath = req.file ? req.file.path : null;
-
+        let updatedItem;
         console.log(data);
         console.log(req.file);
-        
-        const updatedItem = {
-            category: data.category,
-            foodName: data.foodName,
-            price: data.price,
-            description: data.description,
-            rating: data.rating,
-            allergyIngredients: data.allergyIngredients,
-            availability: data.availability,
-            image: imagePath // Use the uploaded file path if it exists
-          };
+        if(imagePath){
+            updatedItem = {
+                category: data.category,
+                foodName: data.foodName,
+                price: data.price,
+                description: data.description,
+                rating: data.rating,
+                allergyIngredients: data.allergyIngredients,
+                availability: data.availability,
+                image: imagePath // Use the uploaded file path if it exists
+              };
+        }else{
+            updatedItem = {
+                category: data.category,
+                foodName: data.foodName,
+                price: data.price,
+                description: data.description,
+                rating: data.rating,
+                allergyIngredients: data.allergyIngredients,
+                availability: data.availability,
+              };
+        }
 
         const updatedMenuItem = await Menu.findByIdAndUpdate(req.params.id, updatedItem, {
             new: true,

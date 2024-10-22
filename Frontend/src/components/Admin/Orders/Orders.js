@@ -8,6 +8,7 @@ function Orders() {
 
   useEffect(() => {
     if (selectedDate) {
+      setOrders([]);
       fetchOrders(selectedDate);
     }
   }, [selectedDate]);

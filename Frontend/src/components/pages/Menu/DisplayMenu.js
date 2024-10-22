@@ -57,11 +57,9 @@ function DisplayMenu() {
   }, []);
 
   useEffect(() => {
-    // Restore cart state from location state when navigating back from cart page
     if (location.state && location.state.cartItems) {
       setCartItems(location.state.cartItems);
     } else {
-      // Restore cart state from local storage
       const savedCartItems = localStorage.getItem('cartItems');
       if (savedCartItems) {
         setCartItems(JSON.parse(savedCartItems));
@@ -74,16 +72,8 @@ function DisplayMenu() {
 
 
   useEffect(() => {
-    // Save cart items to local storage whenever cartItems changes
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
   }, [cartItems]);
-
-  // const handleAddToCart = (item) => {
-  //   setCartItems((prevItems) => ({
-  //     ...prevItems,
-  //     [item._id]: (prevItems[item._id] || 0) + 1,
-  //   }));
-  // };
 
   const handleAddToCart = (item) => {
     setCartItems((prevItems) => {
@@ -164,12 +154,9 @@ function DisplayMenu() {
       <br />
       <br />
       <br />
-      {/* <br />
-      <br />
-      <br /> */}
+    
       <div className="container-fluid">
         <div className="row">
-          {/* Categories sidebar */}
 
           {!searchTerm && (
           <CategoriesSidebar
@@ -189,19 +176,11 @@ function DisplayMenu() {
             <SearchBar onSearch={handleSearch} />
           </div>
 
-            {/* Scrollable container for food items */}
             <div
               className="scrollable-container"
               onScroll={handleScroll}
             >
-{/*               
-            <MenuItemList
-            categories={categories}
-            foodItems={filteredFoodItems}
-            categoryRefs={categoryRefs}
-            handleEditClick={handleEditClick}
-            searchTerm={searchTerm}
-          /> */}
+
       <MenuItemList
         categories={categories}
         foodItems={filteredFoodItems}
@@ -217,12 +196,6 @@ function DisplayMenu() {
           </main>
         </div>
       </div>
-      {/* <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br /> */}
     </>
   );
 }

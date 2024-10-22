@@ -9,6 +9,9 @@ function Menu() {
     <>
       <Layout>
         <DisplayMenu/>
+        <br></br>
+        <br></br>
+        <br></br>
 
       </Layout>
     </>

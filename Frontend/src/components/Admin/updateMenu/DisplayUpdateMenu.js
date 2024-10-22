@@ -75,7 +75,6 @@ function DisplayUpdateMenu() {
     navigate(`/admin/updateItemForm`, { state: { item } });
   };
 
-  const handleAddItemClick = () => {}
   const handleSearch = (term) => {
     setSearchTerm(term);
     if (term) {

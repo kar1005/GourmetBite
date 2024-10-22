@@ -77,7 +77,7 @@ const UpdateItemForm = () => {
       }
       setAlertMessage("Item updated successfully!");
       setAlertType("success");
-      setTimeout(() => navigate("/admin/updateMenu"), 2000);
+      setTimeout(() => navigate("/admin/panel"), 2000);
     } catch (error) {
       setAlertMessage("Failed to update item. Please try again.");
       setAlertType("danger");

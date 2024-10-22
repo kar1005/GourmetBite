@@ -7,7 +7,7 @@ const couponSchema = new Schema({
     validFrom : {type:Date , require:true},
     validTo : {type:Date , require:true},
     status : {type:String , require:true},
-    validFor : [{type:mongoose.Types.ObjectId , require:false, ref:'Customer'} ],
+    validFor : [{type:mongoose.Types.ObjectId , require:false, ref:'Customer'}],
 });
 
 module.exports = mongoose.model("Coupons",couponSchema);

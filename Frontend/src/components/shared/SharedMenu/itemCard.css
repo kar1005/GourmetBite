@@ -104,7 +104,7 @@
 
 
 /*ONLY FOR MENU CART _ USER*/
-
+/* 
 .cart-footer {
   position: fixed;
   bottom: 0;
@@ -156,12 +156,6 @@
   justify-content: center;
 }
 
-
-
-
-/*********************************NEW********************************************/
-
-
 .quantity-control {
   display: flex;
   align-items: center;
@@ -171,7 +165,7 @@
   border-radius: 25px;
   padding: 5px;
 }
-/* 
+
 .quantity-control button {
   background-color: #ff3b6c;
   color: white;
@@ -193,14 +187,76 @@
 .quantity-control span {
   color: #ff3b6c;
   font-weight: bold;
+} 
+
+.cart-total {
+  font-size: 18px;
+  font-weight: bold;
 } */
+
+.cart-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #ff3b6c;
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  z-index: 1000;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.cart-footer button {
+  background-color: white;
+  color: #ff3b6c;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  min-width: 140px;
+  font-size: 14px;
+}
+
+.cart-footer button:hover {
+  background-color: #fc4976;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 
 .cart-total {
   font-size: 18px;
   font-weight: bold;
 }
 
+/* Add padding to main content to prevent overlap */
+.g-4 {
+  margin-bottom: 80px;
+}
 
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+  .cart-footer {
+    padding: 12px 15px;
+  }
+
+  .cart-footer button {
+    padding: 10px 20px;
+    min-width: 120px;
+    font-size: 13px;
+  }
+
+  .cart-total {
+    font-size: 16px;
+  }
+}
 
 
 

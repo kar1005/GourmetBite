@@ -9,7 +9,7 @@ import UpdateItemForm from './components/Admin/updateMenu/UpdateItemForm';
 import CartPage from './components/pages/Menu/cart/CartPage';
 import RazorpayPayment from './components/payment/RazorpayPayment';
 import KitchenHome from './components/Kitchen/KitchenHome';
-import MyOrders from './components/pages/MyOrders/myOrders';
+// import MyOrders from './components/pages/MyOrders/myOrders';
 import { AuthProvider } from './components/shared/Auth/auth-context';
 import Profile from './components/pages/Profile/Profile';
 import Authenticate from './components/pages/Authenticate/Authenticate';
@@ -36,6 +36,11 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Authenticate />} />
           <Route path="/cart" element={<CartPage />} />
+          {isAuthenticated ? (
+            <Route path="/razorpay" element={<RazorpayPayment />} />
+          ) : (
+            <Route path="/razorpay" element={<Navigate to="/login" />} />
+          )}
 
           {/* Protected Routes */}
           {isAuthenticated ? (
@@ -54,17 +59,13 @@ function App() {
             <Route path="/booktable" element={<Navigate to="/login" />} />
           )}
           {isAuthenticated ? (
-              <Route path="/myOrders" element={<MyOrders />} />
-          ) : (
-            <Route path="/myOrders" element={<Navigate to="/login" />} />
-          )}
-          {isAuthenticated ? (
               <Route path="/kitchen/home" element={<KitchenHome />} />
           ) : (
             <Route path="/kitchen/home" element={<Navigate to="/login" />} />
           )}
               <Route path="/admin" element={<AdminMain />} />
               <Route path="/admin/panel" element={<AdminSidebar />} />
+              <Route path="/admin/updateItemForm" element={<UpdateItemForm />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>

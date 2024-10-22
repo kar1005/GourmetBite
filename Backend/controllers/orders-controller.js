@@ -157,8 +157,11 @@ exports.updateOrderFromkitchen = async (req,res)=> {
 
 exports.getOrdersByCustomer = async (req,res)=> {
     try {
-        const rawOrders = await Order.find().where('customer').equals(req.params.id);
-
+        const rawOrders = await Order.find({
+            customer: req.params.id,
+            status: { $ne: 'Payment Pending' }
+        })
+        .sort({ time: -1 });
         let intemsObjectArray=[];
         let orders=[];
         let temp;
@@ -265,7 +268,8 @@ exports.getOrderByDate = async (req, res) => {
             tableNo :rawOrders[i].tableNo,
             items : intemsObjectArray,
             notes:rawOrders[i].notes,
-            time:rawOrders[i].time
+            time:rawOrders[i].time,
+            amount:rawOrders[i].amount
         };
         orders.push(finalobject);
         intemsObjectArray=[];

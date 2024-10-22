@@ -81,7 +81,9 @@ function MenuItemList({
       {!searchTerm ? (
         categories.map((category) => (
           <div key={category} ref={(el) => (categoryRefs.current[category] = el)}>
+            <br></br>
             <h3>{category}</h3>
+            <hr></hr>
             <Row xs={1} md={2} className="g-4">
               {foodItems
                 .filter((item) => item.category === category)
@@ -94,13 +96,16 @@ function MenuItemList({
           {foodItems.map(renderItemCard)}
         </Row>
       )}
-      {totalItemsInCart > 0 && (
-        <div className="cart-footer">
-          <Button onClick={onCartNavigation}>
-            {totalItemsInCart} item{totalItemsInCart > 1 ? 's' : ''} added
-          </Button>
-        </div>
-      )}
+{totalItemsInCart > 0 && (
+  <div className="cart-footer">
+    <span className="cart-total">
+      {totalItemsInCart} item{totalItemsInCart > 1 ? 's' : ''} added
+    </span>
+    <Button onClick={onCartNavigation}>
+      VIEW CART
+    </Button>
+  </div>
+)}
     </>
   );
 }

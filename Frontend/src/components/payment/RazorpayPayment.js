@@ -110,7 +110,7 @@ const RazorpayPayment = () => {
           }).then(async () => {
             await UpdateOrderDetails(response.razorpay_payment_id);
             alert('Payment verified and successful!');
-            navigate('/myOrders', { state: { order: updatedOrder } });
+            navigate('/profile', { state: { order: updatedOrder } });
           }).catch(() => {
             alert('Payment verification failed!');
           });
