@@ -15,7 +15,7 @@ const UpdateItemForm = () => {
     description: existingFoodItem?.description || "",
     rating: existingFoodItem?.rating || "",
     allergyIngredients: existingFoodItem?.allergyIngredients || "",
-    availability: existingFoodItem?.availability || true,
+    availability: existingFoodItem?.availability,
   });
 
   const [alertMessage, setAlertMessage] = useState("");

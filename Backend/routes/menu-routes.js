@@ -22,6 +22,8 @@ const upload = multer({ storage }); // Specify your upload destination
 //add food item
 router.post('/', upload.single('image'),menuController.creatFoodItem);
 
+router.get('/available',menuController.getAvailableFoodItems);
+
 //get food item by id
 router.get('/:id',menuController.getFoodById);
 
@@ -34,6 +36,8 @@ router.get('/category/:category',menuController.getFoodByCategory);
 
 //get list of category
 router.get('/categories/list', menuController.getCategories);  
+
+
 
 //get all food items
 router.get('/',menuController.getAllFoodItems);

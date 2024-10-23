@@ -33,7 +33,7 @@ function DisplayMenu() {
     const fetchCategories = async () => {
       try {
         const responseCategory = await fetch('http://localhost:5000/menu/categories/list');
-        const responseMenu = await fetch('http://localhost:5000/menu/');
+        const responseMenu = await fetch('http://localhost:5000/menu/available');
         if (!responseCategory.ok || !responseMenu.ok) {
           throw new Error('Failed to fetch categories');
         }

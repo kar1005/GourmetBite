@@ -137,6 +137,15 @@ exports.getFoodByCategory = async(req,res) => {
     }
 
 }
+exports.getAvailableFoodItems = async(req,res) => {
+    try {
+        const menuItems = await Menu.find().where('availability').equals('true');
+        res.status(200).json(menuItems);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+
 exports.getAllFoodItems = async(req,res) => {
     try {
         const menuItems = await Menu.find();
