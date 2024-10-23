@@ -58,11 +58,7 @@ function App() {
           ) : (
             <Route path="/booktable" element={<Navigate to="/login" />} />
           )}
-          {isAuthenticated ? (
               <Route path="/kitchen/home" element={<KitchenHome />} />
-          ) : (
-            <Route path="/kitchen/home" element={<Navigate to="/login" />} />
-          )}
               <Route path="/admin" element={<AdminMain />} />
               <Route path="/admin/panel" element={<AdminSidebar />} />
               <Route path="/admin/updateItemForm" element={<UpdateItemForm />} />

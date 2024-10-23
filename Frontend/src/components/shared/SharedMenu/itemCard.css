@@ -135,7 +135,7 @@
   background-color:#fc4976;
   transform: translateY(-2px);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
+}*/
 
 .quantity-control {
   display: flex;
@@ -188,7 +188,7 @@
   color: #ff3b6c;
   font-weight: bold;
 } 
-
+/*
 .cart-total {
   font-size: 18px;
   font-weight: bold;

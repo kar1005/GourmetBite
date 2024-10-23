@@ -47,6 +47,7 @@ const ProfileLayout = () => {
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('tableNumber');
+    localStorage.removeItem('cartItems');
     navigate('/');
   };
   return (
